@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Ticketing App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f7ff;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    li {
+      border-bottom: 1px solid #eee;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    a {
+      display: block;
+      padding: 15px 25px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #5b21b6; /* purple accent */
+      transition: background 0.3s, color 0.3s;
+    }
+
+    a:hover {
+      background: #ede9fe;
+      color: #4c1d95;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li><a href="./memory/index.html">In Memory Storage</a></li>
+    <li><a href="./session/index.html">Session Storage</a></li>
+    <li><a href="./local/index.html">Local Storage</a></li>
+  </ul>
+</body>
+</html>

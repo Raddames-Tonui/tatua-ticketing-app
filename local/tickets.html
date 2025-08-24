@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tatua Ticket List</title>
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/tickets.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+     <header class="header">
+    <div>
+        <a href="../index.html"><img src="../assets/logo.png" alt="Tatua Logo"></a>
+        <h1 class="logo">Tatua</h1>
+    </div>
+    <nav class="nav">
+        
+      <a href="../local/index.html" class="nav-link" >Raise Ticket</a>
+      <a href="../local/tickets.html" class="nav-link" active>Tickets List</a>
+    </nav>
+  </header>
+
+    <main class="main">
+    <div class="refresh"><i class="fa-solid fa-rotate"></i> Refresh</div>
+    <table class="tickets-table">
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>Raised by</th>
+          <th>Ticket Details</th>
+          <th>Date Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tickets-body"></tbody>
+      <!-- <tbody>
+        <tr>
+          <td>1</td>
+          <td>
+            Harvey Specter<br>
+            <span class="email">harvey.specter@suits.us</span>
+          </td>
+          <td>
+            <strong>Mobile App is slow</strong>
+            Logging in is taking 5 mins and…
+          </td>
+          <td>2024-03-06 18:00:00</td>
+          <td>
+            <div class="actions">
+              <button class="icon-btn" title="Show details"><i class="fa-solid fa-circle-info"></i></button>
+              <button class="icon-btn" title="Download attachment"><i class="fa-solid fa-download"></i></button>
+              <button class="icon-btn" title="Call user"><i class="fa-solid fa-phone"></i></button>
+              <button class="icon-btn" title="Send email"><i class="fa-solid fa-envelope"></i></button>
+              <button class="icon-btn" title="Edit ticket"><i class="fa-solid fa-pen"></i></button>
+              <button class="icon-btn delete" title="Delete ticket"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      </tbody> -->
+    </table>
+
+  </main>
+
+    <script src="../js/main.js"></script>
+    <script src="../local/localstorage.js"></script>
+    
+</body>
+</html>

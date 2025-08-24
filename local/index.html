@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tatua Ticketing System</title>
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div>
+        <a href="../index.html"><img src="../assets/logo.png" alt="Tatua Logo"></a>
+        <h1 class="logo">Tatua</h1>
+    </div>
+    <nav class="nav">        
+      <a  id="nav-form" href="../local/index.html" class="nav-link" active>Raise Ticket</a>
+      <a  id="nav-tickets" href="../local/tickets.html" class="nav-link">Tickets List</a>
+    </nav>
+  </header>
+
+  <main id="form-page" class="main">
+    <p class="intro-text">
+      Have any enquiries? Fill this form and we will get back to you as soon as possible
+    </p>
+
+    <form id="ticket-form" class="ticket-form" action="#" method="post" enctype="multipart/form-data">
+      
+
+      <div class="form-group">
+        <label for="fullName" class="form-label">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" class="form-input" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email Address:</label>
+        <input type="email" id="email" name="email" class="form-input" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone" class="form-label">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" class="form-input">
+      </div>
+
+      <div class="form-group">
+        <label for="subject" class="form-label">Subject:</label>
+        <select id="subject" name="subject" class="form-select" required>
+          <option value=""></option>
+          <option value="support">Support</option>
+          <option value="billing">Billing</option>
+          <option value="technical">Technical Issue</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message" class="form-label">Message:</label>
+        <textarea id="message" name="message" class="form-textarea" rows="5" required></textarea>
+      </div>
+
+        <div class="form-group">
+            <div><span class="form-label">Preferred Contact</span></div>
+            <div class="radio-buttons">
+                <label class="radio-label">
+                <input type="radio" name="preferredContact" value="email" class="form-radio">
+                Email
+                </label>
+                <label class="radio-label">
+                <input type="radio" name="preferredContact" value="phone" class="form-radio">
+                Phone
+                </label>
+            </div>
+        </div>
+
+
+      <div class="form-group">
+        <label for="attachment" class="form-label">Attachment</label>
+        <input type="file" id="attachment" name="attachment" class="form-file" multiple>
+      </div>
+
+      <div class="form-group form-terms">
+        <label class="checkbox-label">
+          <input type="checkbox" id="terms" name="terms" class="form-checkbox" required >
+          I agree to the <a href="#" class="terms-link">Terms and Conditions</a>
+        </label>
+      </div>
+
+      <button type="submit" class="btn-submit">Submit</button>
+      <button type="reset" class="btn-reset">Reset</button>
+    </form>
+  </main>
+
+
+   <section id="tickets-page" style="display:none;">
+    <main class="main-wrapper">
+    <div class="refresh"><i class="fa-solid fa-rotate"></i> Refresh</div>
+    <table class="tickets-table">
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>Raised by</th>
+          <th>Ticket Details</th>
+          <th>Date Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tickets-body">
+            <!-- JS will inject rows here in in memory storage -->
+      </tbody>
+    </table>
+  </main>
+
+  <script src="../js/main.js"></script>
+  <script src="../local/localstorage.js"></script>
+
+
+</body>
+</html>

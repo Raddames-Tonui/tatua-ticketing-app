@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tatua Ticket List</title>
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/tickets.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+     <header class="header">
+    <div>
+        <a href="../index.html"><img src="../assets/logo.png" alt="Tatua Logo"></a>
+        <h1 class="logo">Tatua</h1>
+    </div>
+    <nav class="nav">
+        
+      <a href="../memory/index.html" class="nav-link" >Raise Ticket</a>
+      <a href="../memory/tickets.html" class="nav-link" active>Tickets List</a>
+    </nav>
+  </header>
+
+    <main class="main">
+    <div class="refresh"><i class="fa-solid fa-rotate"></i> Refresh</div>
+    <table class="tickets-table">
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>Raised by</th>
+          <th>Ticket Details</th>
+          <th>Date Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tickets-body"></tbody>
+      
+    </table>
+
+  </main>
+    <script src="../memory/inmemory.js"></script>
+
+</body>
+</html>

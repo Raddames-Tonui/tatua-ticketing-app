@@ -1,0 +1,135 @@
+ /* @import url('./variables.css'); */
+:root {
+  /* Brand Palette */
+  --color-primary: #2C1D46;   /* header background */
+  --color-secondary: #65558F; /* buttons, accents */
+  --color-accent: #D98873;    /* hover, active links */
+
+  /* Neutral Palette */
+  --color-bg: #f5f5f5;
+  --color-text: #333;
+  --color-white: #fff;
+  --color-border: #bbb;
+
+  /* States */
+  --color-focus: #6d28d9;
+  --color-hover: #5b21b6;
+}
+
+
+.main {
+  margin: 1rem auto;
+  padding: 12px 35px;
+}
+
+.tickets-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+
+.tickets-table thead {
+  color: var(--color-secondary);
+  border-bottom: 2px solid var(--color-secondary);
+  font-weight: 600;
+}
+
+.tickets-table th, 
+.tickets-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: top;
+}
+
+/* .tickets-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+} */
+
+.tickets-table th {
+  font-weight: 600;
+}
+
+.tickets-table td .email {
+  color: gray;
+  font-size: 12px;
+}
+
+.tickets-table td strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.ticket-message {
+  max-width: 400px;
+}
+
+.ticket-message .truncate {
+  display: inline-block;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  color: gray;
+
+}
+
+.ticket-date, .ticket-id {
+  vertical-align: middle;   
+  height: 50px;             
+}
+
+.cell-content {
+  display: flex;
+  align-items: center;  
+  justify-content: start; 
+  height: 100%;
+}
+
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-secondary);
+  font-size: 14px;
+}
+
+.icon-btn:hover {
+  color: var(--color-accent);
+}
+
+.actions .icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #555;
+  font-size: 1.05rem;
+}
+
+.actions .icon-btn:hover {
+  color: #000;
+}
+
+.actions .delete {
+  color: #e74c3c;
+}
+
+.refresh {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6A68D8;
+  cursor: pointer;
+}
+
