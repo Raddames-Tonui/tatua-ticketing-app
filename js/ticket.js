@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const url = window.location.href;
   const isLocal = url.includes("/local/");
 
-  //  STORAGE HELPERS 
   const storage = {
     get: () => {
       if (isLocal) {

@@ -114,43 +114,6 @@
   height: 100%;
 }
 
-/* .actions {
-  display: flex;
-  gap: 8px;
-}
-
-.icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-secondary);
-  font-size: 14px;
-}
-
-.icon-btn:hover {
-  color: var(--color-accent);
-}
-
-.actions .icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  color: #555;
-  font-size: 1.05rem;
-}
-
-.actions .icon-btn:hover {
-  color: #000;
-}
-
-.actions .delete {
-  color: #e74c3c;
-}
-
-
- */
-
 .flex-cell {
   display: flex;
   justify-content: space-evenly; 

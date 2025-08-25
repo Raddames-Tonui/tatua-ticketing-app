@@ -69,9 +69,20 @@
     border: none;
     padding: 8px 16px;
     border-radius: 6px;
-    cursor: pointer;
 }
 
 .success-modal-close-btn:hover {
     background: var(--color-hover);
+}
+
+.cancel {
+  border: none;
+  background: var(--color-white);
+  color: var(--color-accent200);
+  font-weight: bold;
+}
+
+.cancel:hover {
+  background-color: var(--color-white);
+  transform: scale(0.3px);
 }

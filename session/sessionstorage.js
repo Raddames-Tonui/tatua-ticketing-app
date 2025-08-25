@@ -1,5 +1,4 @@
 // Session Storage
-
 function getTickets(){
   return JSON.parse(sessionStorage.getItem("tickets")) || [];
 }
