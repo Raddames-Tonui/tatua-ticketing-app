@@ -6,6 +6,7 @@
   <title>Tatua Ticketing System</title>
   <link rel="stylesheet" href="../css/index.css">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/modal.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -118,15 +119,26 @@
     </form>
   </main>
 
-  <div id="success-modal" class="hidden success-modal">
-    <div class="modal-content">
-      <h2>Success!</h2>
-      <p>Ticket submitted successfully.</p>
-      <button id="close-modal">OK</button>
+
+
+  <div id="success-modal" class="hidden success-modal-overlay">
+    <div class="success-modal-box">
+      <div class="success-modal-header">
+        <h2>Success!</h2>
+        <button class="success-close-btn" id="success-close-btn">&times;</button>
+      </div>
+      <div class="success-modal-body">
+        <p>Ticket submitted successfully.</p>
+      </div>
+      <div class="success-modal-footer">
+        <button class="success-modal-close-btn" id="success-footer-close-btn">Close</button>
+      </div>
     </div>
   </div>
 
+
   <script src="../js/main.js"></script>
+  <script src="../js/modal.js"></script>
 
 </body>
 </html>
