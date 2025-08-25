@@ -22,7 +22,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 300px;
+    min-height: 300px;
 }
 
 /* Header */

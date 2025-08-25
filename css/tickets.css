@@ -148,6 +148,48 @@
 }
 
 
+/* ATTACHMENTS  */
+.ticket-card {
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.ticket-title {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  color: #2C1D46;
+}
+
+.ticket-details p {
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.ticket-attachments {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.attachment-item {
+  border-radius: 6px;
+  padding: 5px;
+  background: #fff;
+}
+
+.attachment-img {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 4px;
+}
+
+.attachment-link {
+  text-decoration: none;
+  color: #572C82;
+  font-weight: bold;
+}
 
 
 /* MODAL CSS */

@@ -96,27 +96,45 @@ function renderSelectedFiles(attachments) {
 
   function showTicketModal(ticket, index) {
     infoBody.innerHTML = `
-        <h2>Ticket #${index + 1}</h2>
-        <p><strong>Name:</strong> ${ticket.fullName}</p>
-        <p><strong>Email:</strong> ${ticket.email || "N/A"}</p>
-        <p><strong>Phone:</strong> ${ticket.phone || "N/A"}</p>
-        <p><strong>Subject:</strong> ${ticket.subject}</p>
-        <p><strong>Message:</strong> ${ticket.message}</p>
-        <p><strong>Date:</strong> ${new Date(ticket.date).toLocaleString()}</p>
-        <p><strong>Attachments:</strong></p>
-        <ul>
-          ${
-            ticket.attachments && ticket.attachments.length > 0
-              ? ticket.attachments.map(file => {
-                  if (file.data && file.data.startsWith("data:image")) {
-                    return `<li><img src="${file.data}" alt="${file.name}" style="max-width:120px; max-height:120px;" /></li>`;
-                  } else {
-                    return `<li><a href="${file.data}" download="${file.name}">${file.name}</a></li>`;
-                  }
-                }).join("")
-              : "<li>No attachments</li>"
-          }
-        </ul>
+      <div class="ticket-card">
+    <h2 class="ticket-title">Ticket  ${index + 1}</h2>
+    <div class="ticket-details">
+    <p><strong>Name:</strong> ${ticket.fullName}</p>
+    <p><strong>Email:</strong> ${ticket.email || "N/A"}</p>
+    <p><strong>Phone:</strong> ${ticket.phone || "N/A"}</p>
+    <p><strong>Subject:</strong> ${ticket.subject}</p>
+    <p><strong>Message:</strong> ${ticket.message}</p>
+    <p><strong>Date:</strong> ${new Date(ticket.date).toLocaleString()}</p>
+    <p><strong>Attachments:</strong></p>
+    <ul class="ticket-attachments">
+      ${
+        ticket.attachments && ticket.attachments.length > 0
+          ? ticket.attachments.map(file => {
+              if (file.data && file.data.startsWith("data:image")) {
+                return `
+                  <li class="attachment-item">
+                    <a href="${file.data}" target="_blank" rel="noopener noreferrer">
+                        <img src="${file.data}" alt="${file.name}" 
+                            class="attachment-img"/>
+                      </a>
+                  </li>`;
+              } else {
+                return `
+                   <li class="attachment-item">
+                    <a href="${file.data}" target="_blank" rel="noopener noreferrer" 
+                      class="attachment-link">
+                      ${file.name}
+                    </a>
+                  </li>`;
+              }
+            }).join("")
+          : "<li class='attachment-item'>No attachments</li>"
+      }
+    </ul>
+  </div>
+</div>
+
+
       `;
 
     openModal(infoModal);
