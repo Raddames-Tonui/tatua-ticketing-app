@@ -1,26 +1,15 @@
-// ====================================
-// Main.js
-// ====================================
 
-// ===== NAV ACTIVE LINK =====
+// Main.js
+
 document.querySelectorAll(".nav-link").forEach(link => {
   if (link.href === window.location.href) {
     link.classList.add("active");
   }
 });
 
-// ====================================
-// DOM READY
-// ====================================
 document.addEventListener("DOMContentLoaded", () => {
 
-  // DETECT STORAGE MODE
   const url = window.location.href;
-
-  // Decide which storage to use:
-  // /local/   -> localStorage
-  // /session/ -> sessionStorage
-  // /memory/  -> in-memory only
   const isLocal   = url.includes("/local/");
   const isSession = url.includes("/session/");
   const isMemory  = url.includes("/memory/");
@@ -28,17 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // In-memory store (resets on reload)
   let memoryStore = [];
 
-  // STORAGE HELPERS
+
   const storage = {
     save: (tickets) => {
       if (isLocal) {
-        // Encode tickets for localStorage
         localStorage.setItem("tickets", btoa(JSON.stringify(tickets)));
       } else if (isSession) {
-        // Store plain JSON in sessionStorage
         sessionStorage.setItem("tickets", JSON.stringify(tickets));
       } else if (isMemory) {
-        // Just keep in-memory
         memoryStore = [...tickets];
       }
     },
@@ -67,19 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // ELEMENTS
+
   const form = document.getElementById("ticket-form");
   const successModal = document.querySelector(".success-modal-overlay");
   const modalCloseButtons = document.querySelectorAll(
     ".success-close-btn, .success-modal-close-btn"
   );
 
-  // Prevent showing modal again if already submitted
   if (sessionStorage.getItem("ticketSubmitted") === "true") {
     successModal.style.display = "none";
   }
 
-  // MODAL FUNCTIONS
   function showSuccessModal() {
     successModal.style.display = "flex";
     sessionStorage.setItem("ticketSubmitted", "true");
@@ -93,10 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", hideSuccessModal)
   );
 
-  // Stop if form is missing
   if (!form) return;
 
-  // ATTACHMENT HANDLING
   let selectedFiles = [];
   const attachmentInput = document.getElementById("attachment");
   const selectedFilesContainer = form.querySelector(".selected-files");
@@ -130,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function validateAttachments(files) {
     const allowedTypes = ["image/jpeg", "image/jpg", "application/pdf"];
-    const maxSize = 3 * 1024 * 1024; // 3MB
+    const maxSize = 3 * 1024 * 1024; 
 
     let valid = true;
     let message = "";
@@ -307,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // FORM SUBMIT
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     let isValid = true;
 
@@ -333,7 +315,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!isValid) return;
 
-    // Build ticket object
+      const base64Files = await Promise.all(
+      selectedFiles.map(file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            resolve({ name: file.name, type: file.type, data: reader.result });
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      })
+    );
+
+
     const ticket = {
       fullName: form.fullName.value.trim(),
       email: form.email.value.trim(),
@@ -341,25 +336,24 @@ document.addEventListener("DOMContentLoaded", () => {
       subject: form.subject.value,
       message: form.message.value.trim(),
       preferredContact: [...form.preferredContact].find(r => r.checked).value,
-      attachments: selectedFiles.map(f => f.name),
+      attachments: base64Files,
       date: new Date()
     };
 
-    // Save
+     console.log(ticket);
+
     storage.save([...storage.get(), ticket]);
 
-    // Reset
     form.reset();
     selectedFiles = [];
     renderSelectedFiles(selectedFilesContainer);
     showSuccessModal();
   });
 
-  // FORM RESET
+
   form.addEventListener("reset", () => {
     selectedFiles = [];
     renderSelectedFiles(selectedFilesContainer);
-
     form.querySelectorAll(".error-message").forEach(el => el.innerText = "");
     form.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
     form.querySelectorAll(".valid").forEach(el => el.classList.remove("valid"));

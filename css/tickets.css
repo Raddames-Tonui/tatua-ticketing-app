@@ -27,7 +27,7 @@
   display: flex;
   gap: 1.2rem;
   justify-content: end;
-  font-size: 1.2rem; 
+  font-size: 1rem; 
 }
 
 .refresh {
@@ -37,7 +37,7 @@
   gap: 5px;
   margin-bottom: 8px;
   font-weight: 600;
-  font-size: 1.2rem; 
+  font-size: 1rem; 
   color: #6A68D8;
   transition: color 0.2s ease, transform 0.2s ease;
 }

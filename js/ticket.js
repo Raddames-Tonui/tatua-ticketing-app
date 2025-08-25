@@ -30,8 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   //  MODAL HELPERS 
-  function openModal(modal) { modal.style.display = "flex"; }
-  function closeModal(modal) { modal.style.display = "none"; }
+  function openModal(modal) { 
+    modal.style.display = "flex"; 
+  }
+  function closeModal(modal) { 
+    modal.style.display = "none"; 
+  }
 
   const infoModal = document.querySelector(".info-modal");
   const editModal = document.querySelector(".edit-modal");
@@ -44,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const alertMessage = alertModal.querySelector(".alert-message");
   const alertOkBtn = alertModal.querySelector(".ok");
 
-  // Close modals on [x] and footer close buttons
   document.querySelectorAll(".success-close-btn, .close-modal").forEach(btn => {
     btn.addEventListener("click", () => {
       const modal = btn.closest(".success-modal-overlay");
@@ -52,12 +55,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+
+function renderSelectedFiles(attachments) {
+  const container = document.querySelector("#selected-files");
+  container.innerHTML = "";
+
+  attachments.forEach((file, index) => {
+    const div = document.createElement("div");
+    div.className = "selected-file";
+
+    // Image preview vs generic file
+    if (file.data && file.data.startsWith("data:image")) {
+      div.innerHTML = `<img src="${file.data}" alt="${file.name}" style="max-width:100px; max-height:100px;" />`;
+    } else {
+      div.innerHTML = `<span>${file.name}</span>`;
+    }
+
+    container.appendChild(div);
+  });
+}
+
+
+
   // Close when clicking outside modal box
   document.querySelectorAll(".success-modal-overlay").forEach(m => {
-    m.addEventListener("click", e => { if (e.target === m) closeModal(m); });
+    m.addEventListener("click", e => {
+      if (e.target === m) closeModal(m);
+    });
   });
 
-  // Alert helper
   function showAlert(msg) {
     alertMessage.textContent = msg;
     openModal(alertModal);
@@ -70,14 +96,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showTicketModal(ticket, index) {
     infoBody.innerHTML = `
-      <h2>Ticket #${index + 1}</h2>
-      <p><strong>Name:</strong> ${ticket.fullName}</p>
-      <p><strong>Email:</strong> ${ticket.email || "N/A"}</p>
-      <p><strong>Phone:</strong> ${ticket.phone || "N/A"}</p>
-      <p><strong>Subject:</strong> ${ticket.subject}</p>
-      <p><strong>Message:</strong> ${ticket.message}</p>
-      <p><strong>Date:</strong> ${new Date(ticket.date).toLocaleString()}</p>
-    `;
+        <h2>Ticket #${index + 1}</h2>
+        <p><strong>Name:</strong> ${ticket.fullName}</p>
+        <p><strong>Email:</strong> ${ticket.email || "N/A"}</p>
+        <p><strong>Phone:</strong> ${ticket.phone || "N/A"}</p>
+        <p><strong>Subject:</strong> ${ticket.subject}</p>
+        <p><strong>Message:</strong> ${ticket.message}</p>
+        <p><strong>Date:</strong> ${new Date(ticket.date).toLocaleString()}</p>
+        <p><strong>Attachments:</strong></p>
+        <ul>
+          ${
+            ticket.attachments && ticket.attachments.length > 0
+              ? ticket.attachments.map(file => {
+                  if (file.data && file.data.startsWith("data:image")) {
+                    return `<li><img src="${file.data}" alt="${file.name}" style="max-width:120px; max-height:120px;" /></li>`;
+                  } else {
+                    return `<li><a href="${file.data}" download="${file.name}">${file.name}</a></li>`;
+                  }
+                }).join("")
+              : "<li>No attachments</li>"
+          }
+        </ul>
+      `;
+
     openModal(infoModal);
   }
 
