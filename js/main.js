@@ -2,9 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const url = window.location.href;
   const isLocal = url.includes("/local/");
 
-  // ============================
   // Storage Helpers
-  // ============================
   const storage = {
     save: (tickets) => {
       if (isLocal) localStorage.setItem("tickets", btoa(JSON.stringify(tickets)));
@@ -27,9 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // ============================
   // FORM PAGE LOGIC
-  // ============================
   const form = document.getElementById("ticket-form");
   let selectedFiles = [];
   let attachmentInput, selectedFilesContainer;
@@ -38,9 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
     attachmentInput = document.getElementById("attachment");
     selectedFilesContainer = form.querySelector(".selected-files");
 
-    // ============================
+
     // Validate Input
-    // ============================
+
     const validateInput = (input) => {
       const wrapper = input.closest(".input-wrapper");
       const indicator = wrapper ? wrapper.querySelector(".input-indicator") : null;
@@ -214,7 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
       form.reset();
       selectedFiles = [];
       renderSelectedFiles(selectedFilesContainer);
-      // alert("Ticket submitted successfully!");
       showSuccessModal();
     });
 
@@ -225,11 +220,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function showSuccessModal() {
       successModal.classList.remove("hidden");
     }
-
     function hideSuccessModal() {
       successModal.classList.add("hidden");
     }
-
     closeModalBtn.addEventListener("click", hideSuccessModal);
 
 
@@ -240,12 +233,11 @@ document.addEventListener("DOMContentLoaded", () => {
       form.querySelectorAll(".error-message").forEach(el => el.innerText = "");
       form.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
       form.querySelectorAll(".valid").forEach(el => el.classList.remove("valid"));
+      form.querySelectorAll(".input-indicator").forEach(ind => ind.innerText = "");
     });
   }
 
-  // ============================
   // TICKETS PAGE LOGIC
-  // ============================
   const ticketsBody = document.getElementById("tickets-body");
   if (ticketsBody) {
     function renderTickets() {
