@@ -24,20 +24,59 @@
 
 /* Form Groups*/
 .form-group {
+  display: grid;
+  grid-template-columns: 150px 1fr; 
+  grid-template-rows: auto auto; 
+  grid-template-areas: 
+    "label form-input "
+    "error-message error-message ";
+  gap: 4px 10px;
   margin-bottom: 18px;
-  display: flex;
-  align-items: center;
 }
 
-/* Labels: fixed width, no wrap */
 .form-label {
-  width: 150px;       
-  font-size: 0.9rem;
+  grid-area: label;
   font-weight: bold;
+  font-size: 0.9rem;
   color: #333;
-  white-space: nowrap;   
-  margin-right: 10px;
+  white-space: nowrap;
+  align-content: center;
 }
+
+.input-wrapper {
+  grid-area: form-input;
+  display: flex; 
+  position: relative;
+}
+
+.input-indicator {
+  font-size: 1.2rem;
+}
+
+.selected-files {
+  grid-column: 2/4;
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 4px;
+}
+
+.selected-files span{
+  display: inline-block;
+  background: #f3f3f3;
+  padding: 2px 6px;
+  margin-right: 4px;
+  border-radius: 4px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-left: 160px; 
+  margin-top: 4px;
+  grid-area: error-message;
+}
+
+
 
 /* Inputs */
 .form-input,
@@ -60,7 +99,6 @@
   box-shadow: 0 0 3px rgba(109, 40, 217, 0.4);
 }
 
-/* Textarea special */
 .form-textarea {
   min-height: 100px;
   resize: vertical;
@@ -71,18 +109,16 @@
   margin-right: 25px;
   font-size: 0.95rem;
 }
+
 .radio-buttons {
-  margin-left: 2rem;
   flex: 1;
 }
 
-/* File input */
 .form-file {
   flex: 1;
   background-color: white;
 }
 
-/* Terms checkbox  */
 .form-terms {
   display: flex;
   align-items: center;
@@ -126,9 +162,13 @@ input[type="checkbox"] {
     accent-color: #65558F;
 }
 
+.form-terms{
+  white-space: nowrap;
+}
 
 .terms-link {
   color: #6d28d9;
+  white-space: nowrap; 
 }
 
 
@@ -171,15 +211,6 @@ input[type="checkbox"] {
   border: 2px solid green !important;
 }
 
-/* Error message below inputs */
-.error-message {
-  color: red;
-  font-size: 0.8rem;
-  margin-left: 160px; 
-  margin-top: 4px;
-  display: none;
-}
-
 
 
 .main-wrapper {
@@ -187,4 +218,25 @@ input[type="checkbox"] {
   padding: 12px 35px;
 }
 
+
+
+
+/* Selected files */
+.remove-file-btn{
+  padding: 2px 3px;
+  
+}
+.selected-file {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.file-name {
+  flex-grow: 1; 
+}
 

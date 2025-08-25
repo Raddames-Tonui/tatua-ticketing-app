@@ -1,8 +1,8 @@
 :root {
   /* Brand Palette */
-  --color-primary: #2C1D46;   /* header background */
-  --color-secondary: #572C82; /* buttons, accents */
-  --color-accent: #D98873;    /* hover, active links */
+  --color-primary: #2C1D46;  
+  --color-secondary: #572C82; 
+  --color-accent: #D98873;  
 
   /* Neutral Palette */
   --color-bg: #f5f5f5;

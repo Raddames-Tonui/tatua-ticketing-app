@@ -42,10 +42,6 @@
   vertical-align: top;
 }
 
-/* .tickets-table tbody tr:nth-child(even) {
-  background: #f9f9f9;
-} */
-
 .tickets-table th {
   font-weight: 600;
 }
@@ -136,80 +132,31 @@
 
 
 /* MODAL CSS */
-
-.modal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.hidden-modal { display: none; }
+#custom-modal {
   position: fixed;
-  inset: 0;
-  background-color: rgba(0,0,0,0.6);
-  z-index: 1000;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.modal.hidden {
-  display: none;
-}
-
 .modal-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  animation: fadeIn 0.3s ease;
+  background: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 300px;
 }
-
 .modal-actions {
+  margin-top: 1rem;
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 15px;
+  gap: 0.5rem;
 }
-
-.btn {
-  padding: 6px 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-
-.btn.ok { background: #4caf50; color: white; }
-.btn.cancel { background: #f44336; color: white; }
 .close-btn {
-  float: right;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-
-
-/*  DETAILS MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-}
-
-.modal-content {
-  background: #fff;
-  margin: 10% auto;
-  padding: 20px;
-  border-radius: 8px;
-  width: 500px;
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-.close {
-  float: right;
-  font-size: 20px;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
   cursor: pointer;
 }

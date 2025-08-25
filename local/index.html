@@ -27,67 +27,96 @@
 
     <form id="ticket-form" class="ticket-form" action="#" method="post" enctype="multipart/form-data">
       
-
       <div class="form-group">
         <label for="fullName" class="form-label">Full Name:</label>
-        <input type="text" id="fullName" name="fullName" class="form-input" required>
+        <div class="input-wrapper">
+          <input type="text" id="fullName" name="fullName" class="form-input" >
+          <span class="input-indicator"></span>
+        </div>
+        <div class="error-message"></div>
       </div>
 
       <div class="form-group">
         <label for="email" class="form-label">Email Address:</label>
-        <input type="email" id="email" name="email" class="form-input" required>
+        <div class="input-wrapper">
+          <input type="email" id="email" name="email" class="form-input" >
+          <span class="input-indicator"></span>
+        </div>
+        <div class="error-message"></div>
       </div>
 
       <div class="form-group">
         <label for="phone" class="form-label">Phone Number:</label>
-        <input type="tel" id="phone" name="phone" class="form-input">
+        <div class="input-wrapper">
+          <input type="tel" id="phone" name="phone" class="form-input">
+          <span class="input-indicator"></span>
+        </div>
+        <div class="error-message"></div>
       </div>
 
       <div class="form-group">
         <label for="subject" class="form-label">Subject:</label>
-        <select id="subject" name="subject" class="form-select" required>
-          <option value=""></option>
-          <option value="support">Support</option>
-          <option value="billing">Billing</option>
-          <option value="technical">Technical Issue</option>
-        </select>
+        <div class="input-wrapper">
+          <select id="subject" name="subject" class="form-select" >
+            <option value=""></option>
+            <option value="support">Support</option>
+            <option value="billing">Billing</option>
+            <option value="technical">Technical Issue</option>
+          </select>
+          <span class="input-indicator"></span>
+        </div>
+        <div class="error-message"></div>
       </div>
 
       <div class="form-group">
         <label for="message" class="form-label">Message:</label>
-        <textarea id="message" name="message" class="form-textarea" rows="5" required></textarea>
+        <div class="input-wrapper">
+          <textarea id="message" name="message" class="form-textarea" rows="5" ></textarea>
+          <span class="input-indicator"></span>
+        </div>
+        <div class="error-message"></div>
       </div>
 
-        <div class="form-group">
-            <div><span class="form-label">Preferred Contact</span></div>
-            <div class="radio-buttons">
-                <label class="radio-label">
-                <input type="radio" name="preferredContact" value="email" class="form-radio">
-                Email
-                </label>
-                <label class="radio-label">
-                <input type="radio" name="preferredContact" value="phone" class="form-radio">
-                Phone
-                </label>
-            </div>
+      <div class="form-group">
+        <div><span class="form-label">Preferred Contact</span></div>
+        <div class="radio-buttons">
+          <label class="radio-label">
+            <input type="radio" name="preferredContact" value="email" class="form-radio">
+            Email
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="preferredContact" value="phone" class="form-radio">
+            Phone
+          </label>
         </div>
-
+        <div class="error-message"></div>
+      </div>
 
       <div class="form-group">
         <label for="attachment" class="form-label">Attachment</label>
-        <input type="file" id="attachment" name="attachment" class="form-file" accept=".pdf,.jpeg,.jpg" multiple>
+        <div class="input-wrapper">
+          <input type="file" id="attachment" name="attachment" class="form-file" accept=".pdf,.jpeg,.jpg" multiple>
+          <span class="input-indicator"></span>
+        </div>
+        <div class="selected-files"></div>
+        <div class="error-message"></div>
       </div>
 
-      <div class="form-group form-terms">
-        <label class="checkbox-label">
-          <input type="checkbox" id="terms" name="terms" class="form-checkbox" required >
+      <div class="form-group">
+        <div class=" form-terms">
+            <label class="checkbox-label">
+            <input type="checkbox" id="terms" name="terms" class="form-checkbox" >
           I agree to the <a href="#" class="terms-link">Terms and Conditions</a>
-        </label>
+          </label>
+        </div>
+        
+        <div class="error-message"></div>
       </div>
 
       <button type="submit" class="btn-submit">Submit</button>
       <button type="reset" class="btn-reset">Reset</button>
     </form>
+
   </main>
 
 
@@ -109,10 +138,7 @@
       </tbody>
     </table>
   </main>
-
   <script src="../js/main.js"></script>
-  <script src="../local/localstorage.js"></script>
-
 
 </body>
 </html>
