@@ -214,8 +214,24 @@ document.addEventListener("DOMContentLoaded", () => {
       form.reset();
       selectedFiles = [];
       renderSelectedFiles(selectedFilesContainer);
-      alert("Ticket submitted successfully!");
+      // alert("Ticket submitted successfully!");
+      showSuccessModal();
     });
+
+      // Success Modal
+    const successModal = document.getElementById("success-modal");
+    const closeModalBtn = document.getElementById("close-modal");
+
+    function showSuccessModal() {
+      successModal.classList.remove("hidden");
+    }
+
+    function hideSuccessModal() {
+      successModal.classList.add("hidden");
+    }
+
+    closeModalBtn.addEventListener("click", hideSuccessModal);
+
 
     // Form reset
     form.addEventListener("reset", () => {

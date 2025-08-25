@@ -160,6 +160,8 @@
 input[type="radio"],
 input[type="checkbox"] {
     accent-color: #65558F;
+    transform: scale(1.5);
+    margin-right: 0.2rem;
 }
 
 .form-terms{
@@ -195,10 +197,10 @@ input[type="checkbox"] {
 /* Error icon sits absolutely at the end */
 .input-indicator {
   position: absolute;
-  right: 10px;
+  right: 3px;
   font-size: 1.2rem;
   color: red;
-  display: none; /* only show on error */
+  display: none; 
   pointer-events: none;
 }
 
@@ -211,21 +213,17 @@ input[type="checkbox"] {
   border: 2px solid green !important;
 }
 
-
-
 .main-wrapper {
   margin: 1rem auto;
   padding: 12px 35px;
+
 }
-
-
-
 
 /* Selected files */
 .remove-file-btn{
-  padding: 2px 3px;
-  
+  padding: 2px 3px;  
 }
+
 .selected-file {
   display: flex;
   justify-content: space-between; 
@@ -240,3 +238,54 @@ input[type="checkbox"] {
   flex-grow: 1; 
 }
 
+
+
+/* SUCCESS MODAL */
+#success-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+#success-modal.hidden {
+  display: none;
+}
+
+#success-modal .modal-content {
+  background-color: #ffffff;
+  border-radius: 0.5rem; 
+  padding: 1.5rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+#success-modal .modal-content h2 {
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+#success-modal .modal-content p {
+  margin-bottom: 1.5rem;
+}
+
+#success-modal .modal-content button {
+  padding: 0.5rem 1rem;
+  background-color: #65558F;
+  color: #fff;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+#success-modal .modal-content button:hover {
+  background-color: #533c87;
+}
