@@ -54,6 +54,15 @@
     flex: 1;
 }
 
+.confirmation-text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20%;
+  color: red;
+  /* font-size: 1.6rem; */
+}
+
 /* Footer */
 .success-modal-footer {
     display: flex;

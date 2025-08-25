@@ -157,7 +157,8 @@
 .ticket-title {
   margin: 0 0 10px;
   font-size: 1.2rem;
-  color: #2C1D46;
+  color: var(--color-accent200);
+  text-decoration: underline;
 }
 
 .ticket-details p {
@@ -169,6 +170,7 @@
   list-style: none;
   padding: 0;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 10px;
 }
@@ -177,7 +179,9 @@
   border-radius: 6px;
   padding: 5px;
   background: #fff;
+  margin-left: 2rem;
 }
+
 
 .attachment-img {
   max-width: 120px;

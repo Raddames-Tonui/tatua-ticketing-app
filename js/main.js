@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const isSession = url.includes("/session/");
   const isMemory  = url.includes("/memory/");
 
-  // In-memory store (resets on reload)
   let memoryStore = [];
 
 

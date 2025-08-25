@@ -97,50 +97,86 @@ function renderSelectedFiles(attachments) {
   function showTicketModal(ticket, index) {
     infoBody.innerHTML = `
       <div class="ticket-card">
-    <h2 class="ticket-title">Ticket  ${index + 1}</h2>
-    <div class="ticket-details">
-    <p><strong>Name:</strong> ${ticket.fullName}</p>
-    <p><strong>Email:</strong> ${ticket.email || "N/A"}</p>
-    <p><strong>Phone:</strong> ${ticket.phone || "N/A"}</p>
-    <p><strong>Subject:</strong> ${ticket.subject}</p>
-    <p><strong>Message:</strong> ${ticket.message}</p>
-    <p><strong>Date:</strong> ${new Date(ticket.date).toLocaleString()}</p>
-    <p><strong>Attachments:</strong></p>
-    <ul class="ticket-attachments">
-      ${
-        ticket.attachments && ticket.attachments.length > 0
-          ? ticket.attachments.map(file => {
-              if (file.data && file.data.startsWith("data:image")) {
-                return `
-                  <li class="attachment-item">
-                    <a href="${file.data}" target="_blank" rel="noopener noreferrer">
-                        <img src="${file.data}" alt="${file.name}" 
-                            class="attachment-img"/>
-                      </a>
-                  </li>`;
-              } else {
-                return `
-                   <li class="attachment-item">
-                    <a href="${file.data}" target="_blank" rel="noopener noreferrer" 
-                      class="attachment-link">
-                      ${file.name}
-                    </a>
-                  </li>`;
-              }
-            }).join("")
-          : "<li class='attachment-item'>No attachments</li>"
-      }
-    </ul>
-  </div>
-</div>
-
-
+          <h2 class="ticket-title">Ticket  ${index + 1}</h2>
+          <div class="ticket-details">
+          <p><strong>Name:</strong> ${ticket.fullName}</p>
+          <p><strong>Email:</strong> ${ticket.email || "N/A"}</p>
+          <p><strong>Phone:</strong> ${ticket.phone || "N/A"}</p>
+          <p><strong>Subject:</strong> ${ticket.subject}</p>
+          <p><strong>Message:</strong> ${ticket.message}</p>
+          <p><strong>Date:</strong> ${new Date(ticket.date).toLocaleString()}</p>
+          <p><strong>Attachments:</strong></p>
+          <ul class="ticket-attachments">
+            ${
+              ticket.attachments && ticket.attachments.length > 0
+                ? ticket.attachments.map(file => {
+                    if (file.data && file.data.startsWith("data:image")) {
+                      return `
+                        <li class="attachment-item">
+                          <a href="${file.data}" target="_blank" rel="noopener noreferrer">
+                              <img src="${file.data}" alt="${file.name}" 
+                                  class="attachment-img"/>
+                            </a>
+                        </li>`;
+                    } else {
+                      return `
+                        <li class="attachment-item">
+                          <a href="${file.data}" target="_blank" rel="noopener noreferrer" 
+                            class="attachment-link">
+                            ${file.name}
+                          </a>
+                        </li>`;
+                    }
+                  }).join("")
+                : "<li class='attachment-item'>No attachments</li>"
+            }
+          </ul>
+        </div>
+      </div>
       `;
 
     openModal(infoModal);
   }
 
-  function truncate(str, length = 25) {
+  function downloadAttachmentModal(ticket, index) {
+    const icon = {
+      download: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.333 13.333h9.334V12H3.333m9.334-6H10V2H6v4H3.333L8 10.667 12.667 6Z" fill="#444054"/></svg>`,
+    }
+
+    infoBody.innerHTML = `
+      <div class="ticket-card">
+          <h2 class="ticket-title">Ticket  ${index + 1}</h2>
+          <ul class="ticket-attachments">
+            ${
+              ticket.attachments && ticket.attachments.length > 0
+                ? ticket.attachments.map(file => {
+                    if (file.data && file.data.startsWith("data:image")) {
+                      return `
+                        <li class="attachment-item">
+                          <a href="${file.data}" target="_blank" rel="noopener noreferrer">
+                            <img src="${file.data}" alt="${file.name}" class="attachment-img"/>
+                          </a>
+                            <a href="${file.data}" download="${file.name}" class="download-btn"> ${icon.download} Download</a>
+                        </li>
+                        `;
+                    } else {
+                      return `
+                        <li class="attachment-item">
+                          <a href="${file.data}" download="${file.name}" class="attachment-link">${file.name} </a>
+                        </li>`;
+                    }
+                  }).join("")
+                : "<li class='attachment-item'>No attachments</li>"
+            }
+          </ul>
+        </div>
+      </div>
+      `;
+
+    openModal(infoModal);
+  }
+
+  function truncate(str, length = 30) {
     if (!str) return "";
     return str.length > length ? str.slice(0, length) + "…" : str;
   }
@@ -188,9 +224,9 @@ function renderSelectedFiles(attachments) {
     `;
     ticketsBody.appendChild(tr);
 
-    // ==== Actions per row ====
+    // Actions per row 
     tr.querySelector('[title="Show details"]').addEventListener("click", () => showTicketModal(ticket, index));
-
+    tr.querySelector('[title = "Download"]').addEventListener("click", () => downloadAttachmentModal(ticket, index ))
     tr.querySelector('[title="Call user"]').addEventListener("click", () => {
       ticket.phone ? (window.location.href = `tel:${ticket.phone}`) : showAlert("No phone number available.");
     });
@@ -200,23 +236,58 @@ function renderSelectedFiles(attachments) {
     });
 
     tr.querySelector('[title="Edit ticket"]').addEventListener("click", () => {
+      editForm.fullName.value = ticket.fullName;
+      editForm.email.value = ticket.email || "";
+      editForm.phone.value = ticket.phone || "";
       editForm.subject.value = ticket.subject;
       editForm.message.value = ticket.message;
+
+      const editAttachments = document.getElementById("edit-attachments");
+      editAttachments.innerHTML = ticket.attachments && ticket.attachments.length > 0
+        ? ticket.attachments.map(file => {
+            if (file.data && file.data.startsWith("data:image")) {
+              return `
+                <li class="attachment-item">
+                  <a href="${file.data}" target="_blank" rel="noopener noreferrer">
+                    <img src="${file.data}" alt="${file.name}" class="attachment-img"/>
+                  </a>
+                  <a href="${file.data}" download="${file.name}" class="download-link">⬇️</a>
+                </li>`;
+            } else {
+              return `
+                <li class="attachment-item">
+                  <a href="${file.data}" target="_blank" rel="noopener noreferrer" class="attachment-link">
+                    ${file.name}
+                  </a>
+                  <a href="${file.data}" download="${file.name}" class="download-link">⬇️</a>
+                </li>`;
+            }
+          }).join("")
+        : "<li class='attachment-item'>No attachments</li>";
+
+      // Open modal
       openModal(editModal);
 
+      // Save changes
       editForm.onsubmit = (e) => {
         e.preventDefault();
         if (!editForm.subject.value.trim() || !editForm.message.value.trim()) {
           showAlert("Subject and Message cannot be empty.");
           return;
         }
+
+        ticket.fullName = editForm.fullName.value.trim();
+        ticket.email = editForm.email.value.trim();
+        ticket.phone = editForm.phone.value.trim();
         ticket.subject = editForm.subject.value.trim();
         ticket.message = editForm.message.value.trim();
+
         storage.save(tickets);
         closeModal(editModal);
         renderTickets();
       };
     });
+
 
     tr.querySelector(".delete").addEventListener("click", () => {
       openModal(confirmModal);
