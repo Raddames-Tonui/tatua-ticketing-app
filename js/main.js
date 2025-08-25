@@ -140,10 +140,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Attachments
     attachmentInput.addEventListener("change", () => {
-      const newFiles = Array.from(attachmentInput.files);
-      selectedFiles = selectedFiles.concat(newFiles);
-      renderSelectedFiles(selectedFilesContainer);
-    });
+    const newFiles = Array.from(attachmentInput.files);
+    const { valid, message } = validateAttachments(newFiles);
+
+    const error = attachmentInput.closest(".form-group").querySelector(".error-message");
+
+    if (!valid) {
+      error.innerText = message;
+      error.style.display = "block";
+      attachmentInput.value = ""; 
+      return;
+    } else {
+      error.innerText = "";
+      error.style.display = "none";
+    }
+
+    selectedFiles = selectedFiles.concat(newFiles);
+    renderSelectedFiles(selectedFilesContainer);
+  });
+
 
     function renderSelectedFiles(container) {
       container.innerHTML = "";
@@ -224,6 +239,29 @@ document.addEventListener("DOMContentLoaded", () => {
       successModal.classList.add("hidden");
     }
     closeModalBtn.addEventListener("click", hideSuccessModal);
+
+
+    function validateAttachments(files) {
+    const allowedTypes = ["image/jpeg", "image/jpg", "application/pdf"];
+    const maxSize = 3 * 1024 * 1024; 
+    let valid = true;
+    let message = "";
+
+    for (let file of files) {
+      if (!allowedTypes.includes(file.type)) {
+        valid = false;
+        message = `Invalid file type: ${file.name}. Only JPG, JPEG, PDF allowed.`;
+        break;
+      }
+      if (file.size > maxSize) {
+        valid = false;
+        message = `File too large: ${file.name}. Max 3 MB allowed.`;
+        break;
+      }
+    }
+
+    return { valid, message };
+  }
 
 
     // Form reset
