@@ -7,6 +7,14 @@ document.querySelectorAll('.nav-link').forEach(link => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  const refreshBtn = document.getElementById("refresh");
+  refreshBtn.addEventListener("click", () => {
+    window.location.reload();
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
   const url = window.location.href;
   const isLocal = url.includes("/local/");
 
@@ -71,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   alertOkBtn.addEventListener("click", () => closeModal(alertModal));
 
-  //  TICKETS TABLE 
   const ticketsBody = document.getElementById("tickets-body");
   if (!ticketsBody) return;
 
@@ -242,12 +249,19 @@ document.addEventListener("DOMContentLoaded", () => {
       tr.querySelector('[title="Show details"]').addEventListener("click", () => showTicketModal(ticket, index));
       tr.querySelector('[title = "Download"]').addEventListener("click", () => downloadAttachmentModal(ticket, index ))
       tr.querySelector('[title="Call user"]').addEventListener("click", () => {
-        ticket.phone ? (window.location.href = `tel:${ticket.phone}`) : showAlert("No phone number available.");
+        ticket.phone ? showAlert("Calling ... ") : showAlert("No phone number available.");
       });
 
-      tr.querySelector('[title="Send email"]').addEventListener("click", () => {
-        ticket.email ? (window.location.href = `mailto:${ticket.email}?subject=${encodeURIComponent(ticket.subject)}`) : showAlert("No email available.");
+       tr.querySelector('[title="Send email"]').addEventListener("click", () => {
+        if (ticket.email) {
+          const subject = encodeURIComponent(`Re: ${ticket.subject}`);
+          // Open mail client in a new window/tab
+          window.open(`mailto:${ticket.email}?subject=${subject}`, "_blank");
+        } else {
+          showAlert("No email available.");
+        }
       });
+
 
       tr.querySelector('[title="Edit ticket"]').addEventListener("click", () => {
         editForm.fullName.value = ticket.fullName;
@@ -316,6 +330,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   window.renderTickets = renderTickets;
-  
   renderTickets();
 });

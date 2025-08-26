@@ -58,15 +58,23 @@ async function decryptData(encoded, password) {
   return JSON.parse(new TextDecoder().decode(decrypted));
 }
 
-// Usage example:
-const tickets = [{ id: 1, name: "Alice" }];
-const password = "secret123";
 
-encryptData(tickets, password).then(enc => {
-  localStorage.setItem("tickets", enc);
 
-  decryptData(enc, password).then(console.log); // [{ id: 1, name: "Alice" }]
-});
+
+
+
+
+
+// const tickets = [{ id: 1, name: "Alice" }];
+// const password = "secret123";
+
+// encryptData(tickets, password).then(enc => {
+//   localStorage.setItem("tickets", enc);
+
+//   decryptData(enc, password).then(console.log); // [{ id: 1, name: "Alice" }]
+// });
+
+
 
 
 

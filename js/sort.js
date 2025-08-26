@@ -72,7 +72,7 @@ document.getElementById("sort").addEventListener("click", () => {
   document.getElementById("reset-sort").addEventListener("click", () => {
     sortBody.innerHTML = "";
     window.history.pushState({}, "", window.location.pathname);
-    renderTickets(); // render default order
+    renderTickets(); 
   });
 
   document.getElementById("submit-sort").addEventListener("click", () => {

@@ -1,3 +1,14 @@
+import { validateInput, validateAttachments } from "../js/validation.js";
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const refreshBtn = document.getElementById("refresh");
+  refreshBtn.addEventListener("click", () => {
+    window.location.reload();
+  });
+});
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll('.nav-link').forEach(link => {
@@ -55,6 +66,84 @@ document.addEventListener("DOMContentLoaded", () => {
   const alertMessage = alertModal.querySelector(".alert-message");
   const alertOkBtn = alertModal.querySelector(".ok");
 
+
+    // File attachments
+  let selectedFiles = [];
+  const attachmentInput = document.getElementById("attachment");
+  const selectedFilesContainer = form.querySelector(".selected-files");
+
+  const renderSelectedFiles = container => {
+    container.innerHTML = "";
+    selectedFiles.forEach((file, index) => {
+      const div = document.createElement("div");
+      div.className = "selected-file";
+      div.innerHTML = `
+        <span class="file-name">${file.name}</span>
+        <button type="button" data-index="${index}" class="remove-file-btn">Remove</button>
+      `;
+      container.appendChild(div);
+    });
+
+    container.querySelectorAll(".remove-file-btn").forEach(btn => {
+      btn.addEventListener("click", e => {
+        const idx = parseInt(e.target.dataset.index);
+        selectedFiles.splice(idx, 1);
+        renderSelectedFiles(container);
+      });
+    });
+  };
+
+  attachmentInput.addEventListener("change", () => {
+    const newFiles = Array.from(attachmentInput.files);
+    const { valid, message } = validateAttachments(newFiles);
+    const error = attachmentInput.closest(".form-group").querySelector(".error-message");
+
+    if (!valid) {
+      error.innerText = message;
+      error.style.display = "block";
+      attachmentInput.value = "";
+      return;
+    }
+
+    error.innerText = "";
+    error.style.display = "none";
+    selectedFiles = selectedFiles.concat(newFiles);
+    renderSelectedFiles(selectedFilesContainer);
+  });
+
+  // Input validations
+  form.querySelectorAll("input, select, textarea").forEach(input => {
+    if (!["radio", "checkbox"].includes(input.type)) {
+      input.addEventListener("input", () => {
+        if (input.classList.contains("invalid") && validateInput(input)) {
+          input.classList.remove("invalid");
+          const wrapper = input.closest(".input-wrapper");
+          const indicator = wrapper ? wrapper.querySelector(".input-indicator") : null;
+          const error = input.closest(".form-group").querySelector(".error-message");
+          if (indicator) indicator.style.display = "none";
+          if (error) { error.innerText = ""; error.style.display = "none"; }
+        }
+      });
+      input.addEventListener("blur", () => validateInput(input));
+    }
+  });
+
+  // Radio validation
+  const radios = form.querySelectorAll("input[type='radio'][name='preferredContact']");
+  radios.forEach(radio => radio.addEventListener("change", () => {
+    const error = radios[0].closest(".form-group").querySelector(".error-message");
+    error.innerText = "";
+    error.style.display = "none";
+  }));
+
+  // Terms checkbox validation
+  const checkbox = form.querySelector("input[type='checkbox'][name='terms']");
+  if (checkbox) {
+    checkbox.addEventListener("change", () => {
+      const error = checkbox.closest(".form-group").querySelector(".error-message");
+      if (checkbox.checked) { error.innerText = ""; error.style.display = "none"; }
+    });
+  }
 
     document.querySelectorAll(".success-close-btn, .close-modal").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -119,7 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     openModal(infoModal);
   }
-
 
   function downloadAttachmentModal(ticket, index) {
   const icon = {
@@ -273,12 +361,13 @@ document.addEventListener("DOMContentLoaded", () => {
       // openModal(editModal);
       showPage("form");
 
-      editForm.onsubmit = (e) => {
-        e.preventDefault();
-        if (!editForm.subject.value.trim() || !editForm.message.value.trim()) {
-          showAlert("Subject and Message cannot be empty.");
-          return;
-        }
+      editForm.onsubmit = e => {
+      e.preventDefault();
+      let validEdit = true;
+      editForm.querySelectorAll("input, textarea").forEach(input => {
+        if (!validateInput(input)) validEdit = false;
+      });
+      if (!validEdit) return;
 
         ticket.fullName = editForm.fullName.value.trim();
         ticket.email = editForm.email.value.trim();
@@ -306,33 +395,52 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  form.addEventListener("submit", e => {
+  form.addEventListener("submit", async e => {
     e.preventDefault();
+    let isValid = true;
 
-    const formData = new FormData(form);
+    form.querySelectorAll("input, select, textarea").forEach(input => {
+      if (!["radio", "checkbox"].includes(input.type)) if (!validateInput(input)) isValid = false;
+    });
 
-    const files = form.attachment.files;
-    let totalSize = 0;
-    for (let file of files) totalSize += file.size;
-    if (totalSize > 3 * 1024 * 1024) {
-      alert("Total file size cannot exceed 3 MB.");
-      return;
+    if (radios.length && ![...radios].some(r => r.checked)) {
+      const error = radios[0].closest(".form-group").querySelector(".error-message");
+      error.innerText = "Please select an option";
+      error.style.display = "block";
+      isValid = false;
     }
 
-    const newTicket = {
-      id: ticketCounter++,
-      fullName: formData.get("fullName"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      subject: formData.get("subject"),
-      message: formData.get("message"),
-      preferredContact: formData.get("preferredContact"),
-      terms: formData.get("terms") ? true : false,
-      attachment: [...files].map(f => f.name),
-      date: new Date().toISOString().replace("T", " ").slice(0,19)
+    if (checkbox && checkbox.required && !checkbox.checked) {
+      const error = checkbox.closest(".form-group").querySelector(".error-message");
+      error.innerText = "You must accept terms";
+      error.style.display = "block";
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    const base64Files = await Promise.all(
+      selectedFiles.map(file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve({ name: file.name, type: file.type, data: reader.result });
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      }))
+    );
+
+    const ticket = {
+      fullName: form.fullName.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      subject: form.subject.value,
+      message: form.message.value.trim(),
+      preferredContact: [...form.preferredContact].find(r => r.checked).value,
+      attachments: base64Files,
+      date: new Date()
     };
 
-    tickets.push(newTicket);
+
+    tickets.push(ticket);
     form.reset();
     showPage("tickets");
     renderTickets();
