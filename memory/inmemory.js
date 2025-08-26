@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navForm = document.getElementById("nav-form");
   const navTickets = document.getElementById("nav-tickets");
 
+
   function showPage(page) {
     if (page === "form") {
       formPage.style.display = "block";
@@ -41,10 +42,125 @@ document.addEventListener("DOMContentLoaded", () => {
   const successCloseBtn = document.getElementById("success-footer-close-btn");
   successCloseBtn.addEventListener("click", () => closeModal(successModal));
 
+
+  
+  const infoModal = document.querySelector(".info-modal");
+  const editModal = document.querySelector(".edit-modal");
+  const confirmModal = document.querySelector(".confirm-modal");
+  const alertModal = document.querySelector(".alert-modal");
+
+  const infoBody = infoModal.querySelector(".success-modal-body");
+  const editForm = editModal.querySelector("#edit-form");
+  const confirmYesBtn = confirmModal.querySelector(".confirm-yes");
+  const alertMessage = alertModal.querySelector(".alert-message");
+  const alertOkBtn = alertModal.querySelector(".ok");
+
+
+    document.querySelectorAll(".success-close-btn, .close-modal").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const modal = btn.closest(".success-modal-overlay");
+      if (modal) closeModal(modal);
+    });
+  });
+
+
+  document.querySelectorAll(".success-modal-overlay").forEach(m => {
+    m.addEventListener("click", e => {
+      if (e.target === m) closeModal(m);
+    });
+  });
+
+  function showAlert(msg) {
+    alertMessage.textContent = msg;
+    openModal(alertModal);
+  }
+  alertOkBtn.addEventListener("click", () => closeModal(alertModal));
+
+  function showTicketModal(ticket, index) {
+    infoBody.innerHTML = `
+      <div class="ticket-card">
+          <h2 class="ticket-title">Ticket  ${index + 1}</h2>
+          <div class="ticket-details">
+          <p><strong>Name:</strong> ${ticket.fullName}</p>
+          <p><strong>Email:</strong> ${ticket.email || "N/A"}</p>
+          <p><strong>Phone:</strong> ${ticket.phone || "N/A"}</p>
+          <p><strong>Subject:</strong> ${ticket.subject}</p>
+          <p><strong>Message:</strong> ${ticket.message}</p>
+          <p><strong>Date:</strong> ${new Date(ticket.date).toLocaleString()}</p>
+          <p><strong>Attachments:</strong></p>
+          <ul class="ticket-attachments">
+            ${
+              ticket.attachments && ticket.attachments.length > 0
+                ? ticket.attachments.map(file => {
+                    if (file.data && file.data.startsWith("data:image")) {
+                      return `
+                        <li class="attachment-item">
+                          <a href="${file.data}" target="_blank" rel="noopener noreferrer">
+                              <img src="${file.data}" alt="${file.name}" 
+                                  class="attachment-img"/>
+                            </a>
+                        </li>`;
+                    } else {
+                      return `
+                        <li class="attachment-item">
+                          <a href="${file.data}" target="_blank" rel="noopener noreferrer" 
+                            class="attachment-link">
+                            ${file.name}
+                          </a>
+                        </li>`;
+                    }
+                  }).join("")
+                : "<li class='attachment-item'>No attachments</li>"
+            }
+          </ul>
+        </div>
+      </div>
+      `;
+
+    openModal(infoModal);
+  }
+
+
+  function downloadAttachmentModal(ticket, index) {
+  const icon = {
+    download: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.333 13.333h9.334V12H3.333m9.334-6H10V2H6v4H3.333L8 10.667 12.667 6Z" fill="#444054"/></svg>`,
+  }
+
+  infoBody.innerHTML = `
+    <div class="ticket-card">
+        <h2 class="ticket-title">Ticket  ${index + 1}</h2>
+        <ul class="ticket-attachments">
+          ${
+            ticket.attachments && ticket.attachments.length > 0
+              ? ticket.attachments.map(file => {
+                  if (file.data && file.data.startsWith("data:image")) {
+                    return `
+                      <li class="attachment-item">
+                        <a href="${file.data}" target="_blank" rel="noopener noreferrer">
+                          <img src="${file.data}" alt="${file.name}" class="attachment-img"/>
+                        </a>
+                          <a href="${file.data}" download="${file.name}" class="download-btn"> ${icon.download} Download</a>
+                      </li>
+                      `;
+                  } else {
+                    return `
+                      <li class="attachment-item">
+                        <a href="${file.data}" download="${file.name}" class="attachment-link">${file.name} </a>
+                      </li>`;
+                  }
+                }).join("")
+              : "<li class='attachment-item'>No attachments</li>"
+          }
+        </ul>
+      </div>
+    </div>
+    `;
+
+  openModal(infoModal);
+  }
+
   function renderTickets() {
     ticketsBody.innerHTML = "";
-
-
       const icons = {
         info: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.33337 4.66665V5.99998H8.66671V4.66665H7.33337ZM9.33337 11.3333V9.99998H8.66671V7.33331H6.66671V8.66665H7.33337V9.99998H6.66671V11.3333H9.33337ZM14.6667 7.99998C14.6667 11.6666 11.6667 14.6666 8.00004 14.6666C4.33337 14.6666 1.33337 11.6666 1.33337 7.99998C1.33337 4.33331 4.33337 1.33331 8.00004 1.33331C11.6667 1.33331 14.6667 4.33331 14.6667 7.99998ZM13.3334 7.99998C13.3334 5.05331 10.9467 2.66665 8.00004 2.66665C5.05337 2.66665 2.66671 5.05331 2.66671 7.99998C2.66671 10.9466 5.05337 13.3333 8.00004 13.3333C10.9467 13.3333 13.3334 10.9466 13.3334 7.99998Z" fill="#444054"/>
@@ -77,21 +193,74 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       ticketsBody.appendChild(tr);
 
-      // ----- Actions -----
-      tr.querySelector(".info").addEventListener("click", () => alert(JSON.stringify(ticket, null, 2)));
-      tr.querySelector(".call")?.addEventListener("click", () => {
-        ticket.phone ? window.location.href = `tel:${ticket.phone}` : alert("No phone number available.");
-      });
-      tr.querySelector(".email")?.addEventListener("click", () => {
-        ticket.email ? window.location.href = `mailto:${ticket.email}?subject=${encodeURIComponent(ticket.subject)}` : alert("No email available.");
-      });
-      tr.querySelector(".delete").addEventListener("click", () => {
-        if (confirm("Delete this ticket?")) {
-          tickets.splice(index, 1);
-          renderTickets();
-        }
-      });
-      tr.querySelector(".edit")?.addEventListener("click", () => {
+      // tr.querySelector('[title="Show details"]').addEventListener("click", () => showTicketModal(ticket, index));
+
+      // tr.querySelector(".info").addEventListener("click", () => alert(JSON.stringify(ticket, null, 2)));
+      // tr.querySelector(".call")?.addEventListener("click", () => {
+      //   ticket.phone ? window.location.href = `tel:${ticket.phone}` : alert("No phone number available.");
+      // });
+      // tr.querySelector(".email")?.addEventListener("click", () => {
+      //   ticket.email ? window.location.href = `mailto:${ticket.email}?subject=${encodeURIComponent(ticket.subject)}` : alert("No email available.");
+      // });
+      // tr.querySelector(".delete").addEventListener("click", () => {
+      //   if (confirm("Delete this ticket?")) {
+      //     tickets.splice(index, 1);
+      //     renderTickets();
+      //   }
+      // });
+      // tr.querySelector(".edit")?.addEventListener("click", () => {
+      //   form.fullName.value = ticket.fullName;
+      //   form.email.value = ticket.email;
+      //   form.phone.value = ticket.phone;
+      //   form.subject.value = ticket.subject;
+      //   form.message.value = ticket.message;
+
+      //   ticketCounter--; 
+      //   tickets.splice(index, 1);
+
+      //   showPage("form");
+      // });
+      
+    tr.querySelector('[title="Show details"]').addEventListener("click", () => showTicketModal(ticket, index));
+    tr.querySelector('[title = "Download"]').addEventListener("click", () => downloadAttachmentModal(ticket, index ))
+    tr.querySelector('[title="Call user"]').addEventListener("click", () => {
+      ticket.phone ? (window.location.href = `tel:${ticket.phone}`) : showAlert("No phone number available.");
+    });
+
+    tr.querySelector('[title="Send email"]').addEventListener("click", () => {
+      ticket.email ? (window.location.href = `mailto:${ticket.email}?subject=${encodeURIComponent(ticket.subject)}`) : showAlert("No email available.");
+    });
+
+    tr.querySelector('[title="Edit ticket"]').addEventListener("click", () => {
+      editForm.fullName.value = ticket.fullName;
+      editForm.email.value = ticket.email || "";
+      editForm.phone.value = ticket.phone || "";
+      editForm.subject.value = ticket.subject;
+      editForm.message.value = ticket.message;
+
+      const editAttachments = document.getElementById("edit-attachments");
+      editAttachments.innerHTML = ticket.attachments && ticket.attachments.length > 0
+        ? ticket.attachments.map(file => {
+            if (file.data && file.data.startsWith("data:image")) {
+              return `
+                <li class="attachment-item">
+                  <a href="${file.data}" target="_blank" rel="noopener noreferrer">
+                    <img src="${file.data}" alt="${file.name}" class="attachment-img"/>
+                  </a>
+                  <a href="${file.data}" download="${file.name}" class="download-link">⬇️</a>
+                </li>`;
+            } else {
+              return `
+                <li class="attachment-item">
+                  <a href="${file.data}" target="_blank" rel="noopener noreferrer" class="attachment-link">
+                    ${file.name}
+                  </a>
+                  <a href="${file.data}" download="${file.name}" class="download-link">⬇️</a>
+                </li>`;
+            }
+          }).join("")
+        : "<li class='attachment-item'>No attachments</li>";
+      
         form.fullName.value = ticket.fullName;
         form.email.value = ticket.email;
         form.phone.value = ticket.phone;
@@ -100,9 +269,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
         ticketCounter--; 
         tickets.splice(index, 1);
+      
+      // openModal(editModal);
+      showPage("form");
 
-        showPage("form");
-      });
+      editForm.onsubmit = (e) => {
+        e.preventDefault();
+        if (!editForm.subject.value.trim() || !editForm.message.value.trim()) {
+          showAlert("Subject and Message cannot be empty.");
+          return;
+        }
+
+        ticket.fullName = editForm.fullName.value.trim();
+        ticket.email = editForm.email.value.trim();
+        ticket.phone = editForm.phone.value.trim();
+        ticket.subject = editForm.subject.value.trim();
+        ticket.message = editForm.message.value.trim();
+
+        storage.save(tickets);
+        closeModal(editModal);
+        renderTickets();
+      };
+    });
+
+
+    tr.querySelector(".delete").addEventListener("click", () => {
+      openModal(confirmModal);
+      confirmYesBtn.onclick = () => {
+        tickets.splice(index, 1);
+        storage.save(tickets);
+        closeModal(confirmModal);
+        renderTickets();
+      };
+    });
+
     });
   }
 
