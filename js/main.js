@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
       container.appendChild(div);
     });
 
-    // Handle remove clicks
+    // Handle remove files
     container.querySelectorAll(".remove-file-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
         const idx = parseInt(e.target.dataset.index);

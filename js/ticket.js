@@ -1,9 +1,10 @@
-// Highlight active nav link
+// Active nav link
 document.querySelectorAll('.nav-link').forEach(link => {
   if (link.href === window.location.href) {
     link.classList.add('active');
   }
 });
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const url = window.location.href;
@@ -29,7 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  //  MODAL HELPERS 
+  window.storage = storage;
+
   function openModal(modal) { 
     modal.style.display = "flex"; 
   }
@@ -56,28 +58,26 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-function renderSelectedFiles(attachments) {
-  const container = document.querySelector("#selected-files");
-  container.innerHTML = "";
+// function renderSelectedFiles(attachments) {
+//   const container = document.querySelector("#selected-files");
+//   container.innerHTML = "";
 
-  attachments.forEach((file, index) => {
-    const div = document.createElement("div");
-    div.className = "selected-file";
+//   attachments.forEach((file, index) => {
+//     const div = document.createElement("div");
+//     div.className = "selected-file";
 
-    // Image preview vs generic file
-    if (file.data && file.data.startsWith("data:image")) {
-      div.innerHTML = `<img src="${file.data}" alt="${file.name}" style="max-width:100px; max-height:100px;" />`;
-    } else {
-      div.innerHTML = `<span>${file.name}</span>`;
-    }
+//     if (file.data && file.data.startsWith("data:image")) {
+//       div.innerHTML = `<img src="${file.data}" alt="${file.name}" style="max-width:100px; max-height:100px;" />`;
+//     } else {
+//       div.innerHTML = `<span>${file.name}</span>`;
+//     }
 
-    container.appendChild(div);
-  });
-}
-
+//     container.appendChild(div);
+//   });
+// }
 
 
-  // Close when clicking outside modal box
+
   document.querySelectorAll(".success-modal-overlay").forEach(m => {
     m.addEventListener("click", e => {
       if (e.target === m) closeModal(m);
@@ -185,7 +185,6 @@ function renderSelectedFiles(attachments) {
   ticketsBody.innerHTML = "";
   const tickets = storage.get();
 
-  // Centralized SVG icon map
   const icons = {
     info: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M7.33337 4.66665V5.99998H8.66671V4.66665H7.33337ZM9.33337 11.3333V9.99998H8.66671V7.33331H6.66671V8.66665H7.33337V9.99998H6.66671V11.3333H9.33337ZM14.6667 7.99998C14.6667 11.6666 11.6667 14.6666 8.00004 14.6666C4.33337 14.6666 1.33337 11.6666 1.33337 7.99998C1.33337 4.33331 4.33337 1.33331 8.00004 1.33331C11.6667 1.33331 14.6667 4.33331 14.6667 7.99998ZM13.3334 7.99998C13.3334 5.05331 10.9467 2.66665 8.00004 2.66665C5.05337 2.66665 2.66671 5.05331 2.66671 7.99998C2.66671 10.9466 5.05337 13.3333 8.00004 13.3333C10.9467 13.3333 13.3334 10.9466 13.3334 7.99998Z" fill="#444054"/>
@@ -301,7 +300,7 @@ function renderSelectedFiles(attachments) {
   });
 }
 
-
-  // Initial render
+  window.renderTickets = renderTickets;
+  
   renderTickets();
 });
