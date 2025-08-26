@@ -66,11 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
         <td><div class="cell-content">${ticket.date}</div></td>
         <td>
           <div class="flex-cell">
-            <button class="icon-btn" title="Show details">${icons.info}</button>
-            <button class="icon-btn" title="Download">${icons.download}</button>
-            <button class="icon-btn" title="Call user">${icons.phone}</button>
-            <button class="icon-btn" title="Send email">${icons.email}</button>
-            <button class="icon-btn" title="Edit ticket">${icons.edit}</button>
+            <button class="icon-btn info" title="Show details">${icons.info}</button>
+            <button class="icon-btn download" title="Download">${icons.download}</button>
+            <button class="icon-btn call" title="Call user">${icons.phone}</button>
+            <button class="icon-btn email" title="Send email">${icons.email}</button>
+            <button class="icon-btn edit" title="Edit ticket">${icons.edit}</button>
             <button class="icon-btn delete" title="Delete ticket">${icons.delete}</button>
           </div>
         </td>
