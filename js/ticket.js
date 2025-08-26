@@ -217,24 +217,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${index + 1}</td>
-      <td>
-        <strong>${ticket.fullName}</strong>
-        <span>${ticket.email || ticket.phone || ""}</span>
-      </td>
-      <td>
-        <strong>${ticket.subject}</strong>
-        <span>${truncate(ticket.message)}</span>
-      </td>
-      <td>${new Date(ticket.date).toLocaleString()}</td>
-      <td class="action-buttons">
-      <div class="flex-cell">
-        <button class="icon-btn" title="Show details">${icons.info}</button>
-        <button class="icon-btn" title="Download">${icons.download}</button>
-        <button class="icon-btn" title="Call user">${icons.phone}</button>
-        <button class="icon-btn" title="Send email">${icons.email}</button>
-        <button class="icon-btn" title="Edit ticket">${icons.edit}</button>
-        <button class="icon-btn delete" title="Delete ticket">${icons.delete}</button>
-      </div>
+          <td>
+            <strong>${ticket.fullName}</strong>
+            <span>${ticket.email || ticket.phone || ""}</span>
+          </td>
+          <td>
+            <strong>${ticket.subject}</strong>
+            <span>${truncate(ticket.message)}</span>
+          </td>
+          <td>${new Date(ticket.date).toLocaleString()}</td>
+          <td class="action-buttons">
+          <div class="flex-cell">
+            <button class="icon-btn" title="Show details">${icons.info}</button>
+            <button class="icon-btn" title="Download">${icons.download}</button>
+            <button class="icon-btn" title="Call user">${icons.phone}</button>
+            <button class="icon-btn" title="Send email">${icons.email}</button>
+            <button class="icon-btn" title="Edit ticket">${icons.edit}</button>
+            <button class="icon-btn delete" title="Delete ticket">${icons.delete}</button>
+          </div>
         </td>
     `;
     ticketsBody.appendChild(tr);
