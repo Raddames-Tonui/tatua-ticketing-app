@@ -1,8 +1,15 @@
+
+
 document.getElementById("sort").addEventListener("click", () => {
   showModal({
     title: "Sort Tickets",
     body: `<div id="sort-body" class="sort-body"></div>
-           <button id="add-sorter-btn" style="margin-top:10px; color:#3b82f6; background:none; border:none; cursor:pointer;">+ Add Sorter</button>`,
+           <button id="add-sorter-btn" style="margin-top:12px;  background:none; border:none; cursor:pointer;">
+              <svg width="84" height="16" viewBox="0 0 84 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.6666 8.66671H8.66659V12.6667H7.33325V8.66671H3.33325V7.33337H7.33325V3.33337H8.66659V7.33337H12.6666V8.66671Z" fill="#5856D6"/>
+              <path d="M22.2628 12.5H20.2855L23.2983 3.77273H25.6761L28.6847 12.5H26.7074L24.5213 5.76705H24.4531L22.2628 12.5ZM22.1392 9.0696H26.8097V10.5099H22.1392V9.0696ZM31.8082 12.6065C31.3111 12.6065 30.8608 12.4787 30.4574 12.223C30.0568 11.9645 29.7386 11.5852 29.5028 11.0852C29.2699 10.5824 29.1534 9.96591 29.1534 9.2358C29.1534 8.4858 29.2741 7.86222 29.5156 7.36506C29.7571 6.86506 30.0781 6.49148 30.4787 6.24432C30.8821 5.99432 31.3239 5.86932 31.804 5.86932C32.1705 5.86932 32.4759 5.93182 32.7202 6.05682C32.9673 6.17898 33.1662 6.33239 33.3168 6.51705C33.4702 6.69886 33.5866 6.87784 33.6662 7.05398H33.7216V3.77273H35.5327V12.5H33.7429V11.4517H33.6662C33.581 11.6335 33.4602 11.8139 33.304 11.9929C33.1506 12.169 32.9503 12.3153 32.7031 12.4318C32.4588 12.5483 32.1605 12.6065 31.8082 12.6065ZM32.3835 11.1619C32.6761 11.1619 32.9233 11.0824 33.125 10.9233C33.3295 10.7614 33.4858 10.5355 33.5938 10.2457C33.7045 9.95597 33.7599 9.61648 33.7599 9.22727C33.7599 8.83807 33.706 8.5 33.598 8.21307C33.4901 7.92614 33.3338 7.70455 33.1293 7.5483C32.9247 7.39205 32.6761 7.31392 32.3835 7.31392C32.0852 7.31392 31.8338 7.39489 31.6293 7.55682C31.4247 7.71875 31.2699 7.94318 31.1648 8.23011C31.0597 8.51705 31.0071 8.84943 31.0071 9.22727C31.0071 9.60795 31.0597 9.9446 31.1648 10.2372C31.2727 10.527 31.4276 10.7543 31.6293 10.919C31.8338 11.081 32.0852 11.1619 32.3835 11.1619ZM39.4371 12.6065C38.94 12.6065 38.4897 12.4787 38.0863 12.223C37.6857 11.9645 37.3675 11.5852 37.1317 11.0852C36.8988 10.5824 36.7823 9.96591 36.7823 9.2358C36.7823 8.4858 36.9031 7.86222 37.1445 7.36506C37.386 6.86506 37.707 6.49148 38.1076 6.24432C38.511 5.99432 38.9528 5.86932 39.4329 5.86932C39.7994 5.86932 40.1048 5.93182 40.3491 6.05682C40.5962 6.17898 40.7951 6.33239 40.9457 6.51705C41.0991 6.69886 41.2156 6.87784 41.2951 7.05398H41.3505V3.77273H43.1616V12.5H41.3718V11.4517H41.2951C41.2099 11.6335 41.0891 11.8139 40.9329 11.9929C40.7795 12.169 40.5792 12.3153 40.332 12.4318C40.0877 12.5483 39.7894 12.6065 39.4371 12.6065ZM40.0124 11.1619C40.305 11.1619 40.5522 11.0824 40.7539 10.9233C40.9585 10.7614 41.1147 10.5355 41.2227 10.2457C41.3335 9.95597 41.3888 9.61648 41.3888 9.22727C41.3888 8.83807 41.3349 8.5 41.2269 8.21307C41.119 7.92614 40.9627 7.70455 40.7582 7.5483C40.5536 7.39205 40.305 7.31392 40.0124 7.31392C39.7141 7.31392 39.4627 7.39489 39.2582 7.55682C39.0536 7.71875 38.8988 7.94318 38.7937 8.23011C38.6886 8.51705 38.636 8.84943 38.636 9.22727C38.636 9.60795 38.6886 9.9446 38.7937 10.2372C38.9016 10.527 39.0565 10.7543 39.2582 10.919C39.4627 11.081 39.7141 11.1619 40.0124 11.1619ZM52.1999 6.28267C52.1658 5.93892 52.0195 5.67187 51.761 5.48153C51.5025 5.29119 51.1516 5.19602 50.7085 5.19602C50.4073 5.19602 50.1531 5.23864 49.9457 5.32386C49.7383 5.40625 49.5792 5.52131 49.4684 5.66903C49.3604 5.81676 49.3065 5.98438 49.3065 6.17188C49.3008 6.32812 49.3335 6.46449 49.4045 6.58097C49.4783 6.69744 49.5792 6.7983 49.707 6.88352C49.8349 6.96591 49.9826 7.03835 50.1502 7.10085C50.3178 7.16051 50.4968 7.21165 50.6871 7.25426L51.4712 7.44176C51.8519 7.52699 52.2013 7.64062 52.5195 7.78267C52.8377 7.92472 53.1133 8.09943 53.3462 8.30682C53.5792 8.5142 53.7596 8.75852 53.8874 9.03977C54.0181 9.32102 54.0849 9.64347 54.0877 10.0071C54.0849 10.5412 53.9485 11.0043 53.6786 11.3963C53.4116 11.7855 53.0252 12.0881 52.5195 12.304C52.0167 12.517 51.4102 12.6236 50.6999 12.6236C49.9954 12.6236 49.3817 12.5156 48.859 12.2997C48.3391 12.0838 47.9329 11.7642 47.6403 11.3409C47.3505 10.9148 47.1985 10.3878 47.1843 9.75994H48.9698C48.9897 10.0526 49.0735 10.2969 49.2212 10.4929C49.3718 10.6861 49.5721 10.8324 49.8221 10.9318C50.0749 11.0284 50.3604 11.0767 50.6786 11.0767C50.9911 11.0767 51.2624 11.0312 51.4925 10.9403C51.7255 10.8494 51.9059 10.723 52.0337 10.5611C52.1616 10.3991 52.2255 10.2131 52.2255 10.0028C52.2255 9.80682 52.1673 9.64205 52.0508 9.50852C51.9371 9.375 51.7695 9.26136 51.5479 9.16761C51.3292 9.07386 51.0607 8.98864 50.7425 8.91193L49.7923 8.6733C49.0565 8.49432 48.4755 8.21449 48.0494 7.83381C47.6232 7.45312 47.4116 6.94034 47.4144 6.29545C47.4116 5.76705 47.5522 5.3054 47.8363 4.91051C48.1232 4.51562 48.5167 4.20739 49.0167 3.9858C49.5167 3.7642 50.0849 3.65341 50.7212 3.65341C51.369 3.65341 51.9343 3.7642 52.4173 3.9858C52.9031 4.20739 53.2809 4.51562 53.5508 4.91051C53.8207 5.3054 53.9599 5.76278 53.9684 6.28267H52.1999ZM58.2521 12.6278C57.5902 12.6278 57.0178 12.4872 56.5348 12.206C56.0547 11.9219 55.6839 11.527 55.4226 11.0213C55.1612 10.5128 55.0305 9.9233 55.0305 9.25284C55.0305 8.5767 55.1612 7.9858 55.4226 7.48011C55.6839 6.97159 56.0547 6.5767 56.5348 6.29545C57.0178 6.01136 57.5902 5.86932 58.2521 5.86932C58.9141 5.86932 59.4851 6.01136 59.9652 6.29545C60.4482 6.5767 60.8203 6.97159 61.0817 7.48011C61.343 7.9858 61.4737 8.5767 61.4737 9.25284C61.4737 9.9233 61.343 10.5128 61.0817 11.0213C60.8203 11.527 60.4482 11.9219 59.9652 12.206C59.4851 12.4872 58.9141 12.6278 58.2521 12.6278ZM58.2607 11.2216C58.5618 11.2216 58.8132 11.1364 59.0149 10.9659C59.2166 10.7926 59.3686 10.5568 59.4709 10.2585C59.576 9.96023 59.6286 9.62074 59.6286 9.24006C59.6286 8.85938 59.576 8.51989 59.4709 8.22159C59.3686 7.9233 59.2166 7.6875 59.0149 7.5142C58.8132 7.34091 58.5618 7.25426 58.2607 7.25426C57.9567 7.25426 57.701 7.34091 57.4936 7.5142C57.2891 7.6875 57.1342 7.9233 57.0291 8.22159C56.9268 8.51989 56.8757 8.85938 56.8757 9.24006C56.8757 9.62074 56.9268 9.96023 57.0291 10.2585C57.1342 10.5568 57.2891 10.7926 57.4936 10.9659C57.701 11.1364 57.9567 11.2216 58.2607 11.2216ZM62.6541 12.5V5.95455H64.4141V7.09659H64.4822C64.6016 6.69034 64.8018 6.38352 65.0831 6.17614C65.3643 5.96591 65.6882 5.8608 66.0547 5.8608C66.1456 5.8608 66.2436 5.86648 66.3487 5.87784C66.4538 5.8892 66.5462 5.90483 66.6257 5.92472V7.53551C66.5405 7.50994 66.4226 7.48722 66.272 7.46733C66.1214 7.44744 65.9837 7.4375 65.8587 7.4375C65.5916 7.4375 65.353 7.49574 65.1428 7.61222C64.9354 7.72585 64.7706 7.88494 64.6484 8.08949C64.5291 8.29403 64.4695 8.52983 64.4695 8.79688V12.5H62.6541ZM71.3739 5.95455V7.31818H67.4322V5.95455H71.3739ZM68.3271 4.38636H70.1424V10.4886C70.1424 10.6562 70.168 10.7869 70.2191 10.8807C70.2702 10.9716 70.3413 11.0355 70.4322 11.0724C70.5259 11.1094 70.6339 11.1278 70.756 11.1278C70.8413 11.1278 70.9265 11.1207 71.0117 11.1065C71.0969 11.0895 71.1623 11.0767 71.2077 11.0682L71.4933 12.419C71.4023 12.4474 71.2745 12.4801 71.1097 12.517C70.945 12.5568 70.7447 12.581 70.5089 12.5895C70.0714 12.6065 69.6879 12.5483 69.3583 12.4148C69.0316 12.2812 68.7773 12.0739 68.5955 11.7926C68.4137 11.5114 68.3242 11.1562 68.3271 10.7273V4.38636ZM75.4691 12.6278C74.7958 12.6278 74.2163 12.4915 73.7305 12.2188C73.2475 11.9432 72.8754 11.554 72.614 11.0511C72.3526 10.5455 72.2219 9.94744 72.2219 9.2571C72.2219 8.58381 72.3526 7.9929 72.614 7.48438C72.8754 6.97585 73.2433 6.57955 73.7177 6.29545C74.195 6.01136 74.7546 5.86932 75.3967 5.86932C75.8285 5.86932 76.2305 5.93892 76.6026 6.07812C76.9776 6.21449 77.3043 6.42045 77.5827 6.69602C77.864 6.97159 78.0827 7.31818 78.239 7.7358C78.3952 8.15057 78.4734 8.63636 78.4734 9.19318V9.69176H72.9464V8.56676H76.7646C76.7646 8.3054 76.7077 8.07386 76.5941 7.87216C76.4805 7.67045 76.3228 7.51278 76.1211 7.39915C75.9222 7.28267 75.6907 7.22443 75.4265 7.22443C75.1509 7.22443 74.9066 7.28835 74.6935 7.41619C74.4833 7.54119 74.3185 7.71023 74.1992 7.9233C74.0799 8.13352 74.0188 8.3679 74.016 8.62642V9.69602C74.016 10.0199 74.0756 10.2997 74.195 10.5355C74.3171 10.7713 74.489 10.9531 74.7106 11.081C74.9322 11.2088 75.195 11.2727 75.4989 11.2727C75.7006 11.2727 75.8853 11.2443 76.0529 11.1875C76.2205 11.1307 76.364 11.0455 76.4833 10.9318C76.6026 10.8182 76.6935 10.679 76.756 10.5142L78.435 10.625C78.3498 11.0284 78.1751 11.3807 77.9109 11.6818C77.6495 11.9801 77.3114 12.2131 76.8967 12.3807C76.4847 12.5455 76.0089 12.6278 75.4691 12.6278ZM79.658 12.5V5.95455H81.418V7.09659H81.4862C81.6055 6.69034 81.8058 6.38352 82.087 6.17614C82.3683 5.96591 82.6921 5.8608 83.0586 5.8608C83.1495 5.8608 83.2475 5.86648 83.3526 5.87784C83.4577 5.8892 83.5501 5.90483 83.6296 5.92472V7.53551C83.5444 7.50994 83.4265 7.48722 83.2759 7.46733C83.1254 7.44744 82.9876 7.4375 82.8626 7.4375C82.5955 7.4375 82.3569 7.49574 82.1467 7.61222C81.9393 7.72585 81.7745 7.88494 81.6523 8.08949C81.533 8.29403 81.4734 8.52983 81.4734 8.79688V12.5H79.658Z" fill="#5856D6"/>
+              </svg>
+           </button>`,
     footer: `
       <button id="reset-sort" class="cancel">Reset Sorting</button>
       <button id="submit-sort" class="success-modal-close-btn">Submit</button>
@@ -12,7 +19,6 @@ document.getElementById("sort").addEventListener("click", () => {
   const sortBody = document.getElementById("sort-body");
   const addBtn = document.getElementById("add-sorter-btn");
 
-  // Match your actual data structure
   const columns = [
     { key: "fullName", label: "Raised By" },
     { key: "email", label: "Email" },
@@ -21,87 +27,103 @@ document.getElementById("sort").addEventListener("click", () => {
     { key: "date", label: "Date Created" }
   ];
 
-  function addSorterRow() {
+  function addSorterRow(defaultColumn = "", defaultOrder = "") {
     const row = document.createElement("div");
-    row.style.display = "flex";
-    row.style.alignItems = "center";
-    row.style.gap = "8px";
-    row.style.marginBottom = "8px";
-
+    row.className = "sort-row";
     row.innerHTML = `
       <select class="sort-column" style="flex:1; padding:6px;">
         <option value="">Select Column</option>
-        ${columns.map(c => `<option value="${c.key}">${c.label}</option>`).join("")}
+        ${columns.map(c => `<option value="${c.key}" ${c.key === defaultColumn ? "selected" : ""}>${c.label}</option>`).join("")}
       </select>
       <select class="sort-order" style="flex:1; padding:6px;">
         <option value="">Select Order</option>
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
+        <option value="asc" ${defaultOrder==="asc"?"selected":""}>Ascending</option>
+        <option value="desc" ${defaultOrder==="desc"?"selected":""}>Descending</option>
       </select>
-      <button class="delete-sorter" style="border:none;background:none;cursor:pointer;color:#a00;">🗑</button>
+      <button class="delete-sorter"  style="border:none;background:none;cursor:pointer; ">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 3V4H4V6H5V19C5 19.5304 5.21071 20.0391 5.58579 20.4142C5.96086 20.7893 6.46957 21 7 21H17C17.5304 21 18.0391 20.7893 18.4142 20.4142C18.7893 20.0391 19 19.5304 19 19V6H20V4H15V3H9ZM7 6H17V19H7V6ZM9 8V17H11V8H9ZM13 8V17H15V8H13Z" fill="#A10900"/>
+        </svg>
+      </button>
     `;
-
     row.querySelector(".delete-sorter").addEventListener("click", () => row.remove());
     sortBody.appendChild(row);
   }
 
-  addBtn.addEventListener("click", addSorterRow);
+  addBtn.addEventListener("click", () => addSorterRow());
+
+  // Load existing params if any
+  const params = new URLSearchParams(window.location.search);
+  if (params.has("sortBy")) {
+    const rules = params.get("sortBy").split(",");
+    rules.forEach(rule => {
+      const [col, ord] = rule.split(":");
+      addSorterRow(col, ord);
+    });
+  } else {
+    addSorterRow();
+  }
 
   document.getElementById("reset-sort").addEventListener("click", () => {
     sortBody.innerHTML = "";
+    window.history.pushState({}, "", window.location.pathname);
+    renderTickets(); // render default order
   });
 
   document.getElementById("submit-sort").addEventListener("click", () => {
-    const sorters = [...sortBody.querySelectorAll("div")].map(row => ({
-      column: row.querySelector(".sort-column").value,
-      order: row.querySelector(".sort-order").value
-    })).filter(s => s.column && s.order);
+    const sorters = [...sortBody.querySelectorAll(".sort-row")].map(row => {
+      const col = row.querySelector(".sort-column").value;
+      const ord = row.querySelector(".sort-order").value;
+      return col && ord ? `${col}:${ord}` : null;
+    }).filter(Boolean);
 
-    console.log("Applied Sorters:", sorters);
+    const newParams = new URLSearchParams(window.location.search);
+    if (sorters.length) {
+      newParams.set("sortBy", sorters.join(","));
+    } else {
+      newParams.delete("sortBy");
+    }
+    window.history.pushState({}, "", `${window.location.pathname}?${newParams}`);
 
-    const tickets = storage.get();
-    const sorted = applySorting(tickets, sorters);
-    renderTickets(sorted);
-
+    renderTickets();
     closeModal();
   });
-
-  addSorterRow(); // start with one row
 });
 
-function applySorting(tickets, sorters) {
-  return [...tickets].sort((a, b) => {
-    for (const sorter of sorters) {
-      const { column, order } = sorter;
+// Apply sorting based on URL params
+function applySorting(tickets) {
+  const params = new URLSearchParams(window.location.search);
+  const rules = params.get("sortBy") ? params.get("sortBy").split(",") : [];
+
+  return tickets.sort((a, b) => {
+    for (const rule of rules) {
+      const [column, order] = rule.split(":");
       let valA = a[column];
       let valB = b[column];
+      if (valA == null || valB == null) continue;
 
-      if (valA === undefined || valB === undefined) continue;
-
-      // Normalize per column
       switch (column) {
         case "fullName":
-        case "subject":
         case "email":
-          valA = String(valA).toLowerCase();
-          valB = String(valB).toLowerCase();
-          break;
+        case "subject":
+          valA = valA.toLowerCase(); valB = valB.toLowerCase(); break;
         case "phone":
-          valA = String(valA).replace(/\D/g, "");
-          valB = String(valB).replace(/\D/g, "");
-          break;
+          valA = valA.replace(/\D/g, ""); valB = valB.replace(/\D/g, ""); break;
         case "date":
-          valA = new Date(valA).getTime();
-          valB = new Date(valB).getTime();
-          break;
-        default:
-          valA = String(valA);
-          valB = String(valB);
+          valA = new Date(valA).getTime(); valB = new Date(valB).getTime(); break;
       }
-
       if (valA < valB) return order === "asc" ? -1 : 1;
       if (valA > valB) return order === "asc" ? 1 : -1;
     }
     return 0;
   });
 }
+
+
+
+const originalRenderTickets = window.renderTickets;
+window.renderTickets = function() {
+  let tickets = storage.get();
+  tickets = applySorting(tickets);
+  originalRenderTickets.call(this, tickets);
+};

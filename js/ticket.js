@@ -58,25 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-// function renderSelectedFiles(attachments) {
-//   const container = document.querySelector("#selected-files");
-//   container.innerHTML = "";
-
-//   attachments.forEach((file, index) => {
-//     const div = document.createElement("div");
-//     div.className = "selected-file";
-
-//     if (file.data && file.data.startsWith("data:image")) {
-//       div.innerHTML = `<img src="${file.data}" alt="${file.name}" style="max-width:100px; max-height:100px;" />`;
-//     } else {
-//       div.innerHTML = `<span>${file.name}</span>`;
-//     }
-
-//     container.appendChild(div);
-//   });
-// }
-
-
 
   document.querySelectorAll(".success-modal-overlay").forEach(m => {
     m.addEventListener("click", e => {
@@ -183,7 +164,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
  function renderTickets() {
   ticketsBody.innerHTML = "";
-  const tickets = storage.get();
+   const tickets = storage.get();
+   
+   const params = new URLSearchParams(window.location.search);
+
+   if (params.has("subject")) {
+     tickets = tickets.filter(t => t.subject.toLowerCase() === params.get("subject").toLowerCase());
+   }
+
+   if (params.has("preferredContact")) {
+      tickets = tickets.filter(t => t.preferredContact === params.get("preferredContact"));
+   }
+
+  if (params.has("sortBy")) {
+    const rules = params.get("sortBy").split(",");
+    tickets.sort((a, b) => {
+      for (const rule of rules) {
+        const [col, ord] = rule.split(":");
+        let valA = a[col], valB = b[col];
+        if (valA == null || valB == null) continue;
+
+        if (["fullName", "subject", "email"].includes(col)) {
+          valA = valA.toLowerCase();
+          valB = valB.toLowerCase();
+        }
+        if (col === "date") {
+          valA = new Date(valA).getTime();
+          valB = new Date(valB).getTime();
+        }
+        if (valA < valB) return ord === "asc" ? -1 : 1;
+        if (valA > valB) return ord === "asc" ? 1 : -1;
+      }
+      return 0;
+    });
+  }
+
+
 
   const icons = {
     info: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
