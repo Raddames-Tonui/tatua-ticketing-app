@@ -1,11 +1,13 @@
 
 /* Form Container */
 .ticket-form {
-  padding: 25px 30px;
+  padding: 10px 30px;
   max-width: 600px;
   width: 100%;
+  overflow-y: scroll;
 }
 
+/* Form Groups*/
 .form-group {
   display: grid;
   grid-template-columns: 150px 1fr; 
@@ -14,7 +16,7 @@
     "label form-input "
     "error-message error-message ";
   gap: 4px 10px;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
 }
 
 .form-label {
@@ -61,7 +63,6 @@
 
 
 
-/* Inputs */
 .form-input,
 .form-select,
 .form-textarea,
@@ -107,3 +108,116 @@
   align-items: center;
   font-size: 0.9rem;
 }
+
+/* Submit button */
+.btn-submit {
+  background: #65558F;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  margin-right: 1.2rem;
+}
+
+.btn-submit:hover {
+  background: #5b21b6;
+}
+
+.btn-reset {
+  border:1px solid #65558F;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.btn-reset:hover {
+  background: #5b21b6;
+  color: #fff;
+}
+
+
+input[type="radio"],
+input[type="checkbox"] {
+    accent-color: #65558F;
+    transform: scale(1.5);
+    margin-right: 0.2rem;
+}
+
+.form-terms{
+  white-space: nowrap;
+}
+
+.terms-link {
+  color: #6d28d9;
+  white-space: nowrap; 
+}
+
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* Inputs keep full width */
+.form-input,
+.form-select,
+.form-textarea,
+.form-file {
+  flex: 1;             
+  padding: 10px 12px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  outline: none;
+  width: 100%;
+}
+
+.input-indicator {
+  position: absolute;
+  right: 3px;
+  font-size: 1.2rem;
+  color: red;
+  display: none; 
+  pointer-events: none;
+}
+
+.invalid {
+  border: 2px solid red !important;
+}
+
+.valid {
+  border: 2px solid green !important;
+}
+
+.main-wrapper {
+  margin: 1rem auto;
+  padding: 12px 35px;
+
+}
+
+/* Selected files */
+.remove-file-btn{
+  padding: 2px 3px;  
+}
+
+.selected-file {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.file-name {
+  flex-grow: 1; 
+}
+

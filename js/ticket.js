@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <a href="${file.data}" target="_blank" rel="noopener noreferrer">
                       <img src="${file.data}" alt="${file.name}" class="attachment-img"/>
                     </a>
-                    <a href="${file.data}" download="${file.name}" class="download-link">⬇️</a>
+                    <a href="${file.data}" download="${file.name}" class="download-link"></a>
                   </li>`;
               } else {
                 return `
@@ -287,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <a href="${file.data}" target="_blank" rel="noopener noreferrer" class="attachment-link">
                       ${file.name}
                     </a>
-                    <a href="${file.data}" download="${file.name}" class="download-link">⬇️</a>
+                    <a href="${file.data}" download="${file.name}" class="download-link"></a>
                   </li>`;
               }
             }).join("")
