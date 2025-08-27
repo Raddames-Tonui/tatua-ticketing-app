@@ -16,12 +16,16 @@ body {
   background-color: var(--color-primary);
   color: var(--color-white);
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   gap: 2rem;
   align-items: center;
   padding: 12px 35px;
 }
-
+.header-wrapper{
+  display: flex;
+  justify-content: start;
+  gap: 2rem;
+}
 .header div {
   display: flex;
   align-items: center;

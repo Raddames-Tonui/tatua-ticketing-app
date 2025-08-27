@@ -5,6 +5,13 @@ document.querySelectorAll('.nav-link').forEach(link => {
   }
 });
 
+    const select = document.getElementById('storage-switch');
+
+    select.addEventListener('change', (e) => {
+      const url = e.target.value;
+      window.location.href = url; 
+    });
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const refreshBtn = document.getElementById("refresh");

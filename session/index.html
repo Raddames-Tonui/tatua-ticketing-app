@@ -11,14 +11,22 @@
 </head>
 <body>
   <header class="header">
-    <div>
+    <div class="header-wrapper">
+        <div>
         <a href="../index.html"><img src="../assets/logo.png" alt="Tatua Logo"></a>
         <h1 class="logo">Tatua</h1>
+      </div>
+      <nav class="nav">        
+        <a  id="nav-form" href="../session/index.html" class="nav-link" active>Raise Ticket</a>
+        <a  id="nav-tickets" href="../session/tickets.html" class="nav-link">Tickets List</a>
+      </nav>
     </div>
-    <nav class="nav">        
-      <a  id="nav-form" href="../session/index.html" class="nav-link" active>Raise Ticket</a>
-      <a  id="nav-tickets" href="../session/tickets.html" class="nav-link">Tickets List</a>
-    </nav>
+  
+    <select id="storage-switch">
+      <option value="../memory/index.html">Memory</option>
+      <option value="../session/index.html">Session</option>
+      <option value="../local/index.html">Local</option>
+    </select>
   </header>
 
   <main id="form-page" class="main">
@@ -138,8 +146,7 @@
       </div>
     </div>
   </div>
-
-
+  
   <script type="module" src="../js/main.js"></script>
 </body>
 </html>

@@ -1,5 +1,13 @@
 import { validateInput, validateAttachments } from "../js/validation.js";
 
+    const select = document.getElementById('storage-switch');
+
+    select.addEventListener('change', (e) => {
+      const url = e.target.value;
+      window.location.href = url; 
+    });
+
+
 document.querySelectorAll(".nav-link").forEach(link => {
   if (link.href === window.location.href) link.classList.add("active");
 });
