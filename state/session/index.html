@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="../css/index.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/modal.css">
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -17,9 +16,16 @@
         <h1 class="logo">Tatua</h1>
     </div>
     <nav class="nav">        
-      <a  id="nav-form" href="../local/index.html" class="nav-link" active>Raise Ticket</a>
-      <a  id="nav-tickets" href="../local/tickets.html" class="nav-link">Tickets List</a>
+      <a  id="nav-form" href="../session/index.html" class="nav-link" active>Raise Ticket</a>
+      <a  id="nav-tickets" href="../session/tickets.html" class="nav-link">Tickets List</a>
     </nav>
+    <select id="storageSelect">
+      <option value="">-- Select Storage --</option>
+      <option value="memory">Memory</option>
+      <option value="session">Session</option>
+      <option value="local">Local</option>
+    </select>
+
   </header>
 
   <main id="form-page" class="main">
@@ -120,8 +126,7 @@
     </form>
   </main>
 
-
-
+  
   <div id="success-modal" class="hidden success-modal-overlay">
     <div class="success-modal-box">
       <div class="success-modal-header">
@@ -142,8 +147,7 @@
   </div>
 
 
-  <script  type="module" src="../js/main.js"></script>
-  <script src="../js/modal.js"></script>
-
+  <script type="module" src="../js/main.js"></script>
+  <script src="../js/switcher.js"></script>
 </body>
 </html>

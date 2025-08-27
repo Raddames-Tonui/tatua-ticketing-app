@@ -1,6 +1,4 @@
 import { validateInput, validateAttachments } from "../js/validation.js";
-import { encryptData, decryptData } from "../js/encrypt.js";
-
 
 document.querySelectorAll(".nav-link").forEach(link => {
   if (link.href === window.location.href) link.classList.add("active");
@@ -14,33 +12,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let memoryStore = [];
 
-  console.log("Crypto:", window.crypto);
-  console.log("Subtle:", window.crypto?.subtle);
-
-
   const storage = {
-    save: async tickets => {
-      if (isLocal) {
-        const encrypted = await encryptData(tickets);
-        localStorage.setItem("tickets", encrypted);
-      } else if (isSession) {
-        sessionStorage.setItem("tickets", JSON.stringify(tickets));
-      } else if (isMemory) {
-        memoryStore = [...tickets];
-      }
+    save: tickets => {
+      if (isLocal) localStorage.setItem("tickets", btoa(JSON.stringify(tickets)));
+      else if (isSession) sessionStorage.setItem("tickets", JSON.stringify(tickets));
+      else if (isMemory) memoryStore = [...tickets];
     },
-    get: async () => {
+    get: () => {
       if (isLocal) {
         const raw = localStorage.getItem("tickets");
         if (!raw) return [];
-        return await decryptData(raw);
+        try { return JSON.parse(atob(raw)); } 
+        catch (e) { localStorage.removeItem("tickets"); return []; }
       }
       if (isSession) return JSON.parse(sessionStorage.getItem("tickets")) || [];
       if (isMemory) return [...memoryStore];
       return [];
     }
   };
-
 
   const form = document.getElementById("ticket-form");
   if (!form) return;
@@ -179,8 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     console.log(ticket);
-    const existingTickets = await storage.get();
-    await storage.save([...existingTickets, ticket]);
+    storage.save([...storage.get(), ticket]);
 
     form.reset();
     selectedFiles = [];
