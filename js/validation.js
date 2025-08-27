@@ -27,7 +27,10 @@ export function validateInput(input) {
   const indicator = wrapper ? wrapper.querySelector(".input-indicator") : null;
   const error = input.closest(".form-group").querySelector(".error-message");
 
-  if (!input.value.trim()) {
+  const value = input.value.trim();
+
+  // Check for empty input
+  if (!value) {
     if (input.required) {
       input.classList.add("invalid");
       input.classList.remove("valid");
@@ -51,17 +54,30 @@ export function validateInput(input) {
     }
   }
 
-  // Custom validation rules
+  // Check max length
+  if (value.length > 250) {
+    input.classList.add("invalid");
+    input.classList.remove("valid");
+    if (indicator) {
+      indicator.innerText = "🚫";
+      indicator.style.display = "inline";
+    }
+    if (error) {
+      error.innerText = "Text cannot exceed 250 characters";
+      error.style.display = "block";
+    }
+    return false;
+  }
+
   let customValid = true;
   let customMessage = "";
 
-  if (input.name === "fullName" && input.value.trim().length < 3) {
+  if (input.name === "fullName" && value.length < 3) {
     customValid = false;
     customMessage = "Name must have at least 3 characters";
   } else if (input.name === "phone") {
-    const val = input.value.trim();
     const regex = /^(\+254|0)?(7\d{8}|1\d{8})$/;
-    if (!regex.test(val)) {
+    if (!regex.test(value)) {
       customValid = false;
       customMessage =
         "Phone must start with +254, 07, or 01 and be valid length";
@@ -92,3 +108,4 @@ export function validateInput(input) {
     return false;
   }
 }
+

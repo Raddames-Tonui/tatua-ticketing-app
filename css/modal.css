@@ -1,6 +1,5 @@
 @import url('./variables.css');
 
-/* Overlay */
 .success-modal-overlay {
     position: fixed;
     top: 0;
@@ -13,7 +12,6 @@
     justify-content: center;
 }
 
-/* Modal Box */
 .success-modal-box {
     background: var(--color-white);
     width: 600px;
@@ -25,19 +23,19 @@
     min-height: 300px;
 }
 
-/* Header */
 .success-modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: var(--color-primary);
     color: var(--color-white);
-    padding: 12px 20px;
+    padding: 5px 20px;
 }
 
 .success-modal-header h2 {
     font-size: 18px;
     margin: 0;
+    color: var(--color-accent);
 }
 
 .success-close-btn {
@@ -47,8 +45,17 @@
     left: 659px;
     top: 7px;
 }
+.alert-message-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px ;
+}
+.alert-message {
+    text-align: center;
+    vertical-align: center;
+}
 
-/* Body */
 .success-modal-body {
     padding: 16px 20px;
     flex: 1;
@@ -63,7 +70,7 @@
   /* font-size: 1.6rem; */
 }
 
-/* Footer */
+
 .success-modal-footer {
     display: flex;
     justify-content: flex-end;
