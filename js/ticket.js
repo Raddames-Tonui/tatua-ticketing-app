@@ -276,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
               if (file.data && file.data.startsWith("data:image")) {
                 return `
                   <li class="attachment-item">
-                    <a href="${file.data}" target="_blank" rel="noopener noreferrer">
+                    <a href="/uploads/${file.data}" target="_blank" rel="noopener noreferrer">
                       <img src="${file.data}" alt="${file.name}" class="attachment-img"/>
                     </a>
                     <a href="${file.data}" download="${file.name}" class="download-link"></a>
