@@ -19,7 +19,6 @@ const modalBody = document.getElementById("modal-body");
 const modalFooter = document.getElementById("modal-footer");
 const modalClose = document.getElementById("modal-close");
 
-// Show modal
 function showModal({ title, body, footer }) {
   modalTitle.innerHTML = title || "";   
   modalBody.innerHTML = body || "";
@@ -28,7 +27,6 @@ function showModal({ title, body, footer }) {
 }
 
 
-// Close modal
 function closeModal() {
   modal.style.display = "none";
   modalTitle.textContent = "";
@@ -40,5 +38,6 @@ modalClose.addEventListener("click", closeModal);
 
 // Close if user clicks outside modal box
 modal.addEventListener("click", (e) => {
-  if (e.target === modal) closeModal();
+  if (e.target === modal)
+    closeModal();
 });

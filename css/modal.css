@@ -29,7 +29,7 @@
     align-items: center;
     background: var(--color-primary);
     color: var(--color-white);
-    padding: 5px 20px;
+    padding: 10px 20px;
 }
 
 .success-modal-header h2 {
@@ -65,9 +65,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20%;
   color: red;
-  /* font-size: 1.6rem; */
 }
 
 
@@ -100,5 +98,5 @@
 
 .cancel:hover {
   background-color: var(--color-white);
-  transform: scale(0.3px);
+  transform: scale(3px);
 }

@@ -5,7 +5,7 @@
   --color-accent200: #7E1913;
 
 
-  --color-bg: #f5f5f5;
+  --color-background: #f5f5f5;
   --color-text: #333;
   --color-white: #fff;
   --color-border: #bbb;
@@ -13,3 +13,13 @@
   --color-focus: #6d28d9;
   --color-hover: #5b21b6;
 }
+
+
+
+/* Fonts */
+/* @font-face {
+  font-family: 'Lexend Deca';
+  src: url('../fonts/Lexend_Deca/LexendDeca-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+} */

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const originalRender = window.renderTickets;
   const originalStorageGet = window.storage && window.storage.get;
 
-  // Utility: parse filters from URL
+  // parse filters from URL
   function parseFiltersFromURL() {
     const params = new URLSearchParams(window.location.search);
     if (!params.has("filters")) return [];
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Utility: parse sort from URL
+  //  parse sort from URL
   function parseSortFromURL() {
     const params = new URLSearchParams(window.location.search);
     if (!params.has("sortBy")) return [];
@@ -102,7 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Listen to popstate so back/forward updates
   window.addEventListener("popstate", reRenderFromParams);
 
-  // Build UI inside modal and wire up submit/reset
   filterBtn.addEventListener("click", () => {
     showModal({
       title: `

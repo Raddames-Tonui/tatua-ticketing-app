@@ -1,16 +1,19 @@
 import { validateInput, validateAttachments } from "../js/validation.js";
+import { activeUrl } from "./utils.js";
 
-    const select = document.getElementById('storage-switch');
+const select = document.getElementById('storage-switch');
 
-    select.addEventListener('change', (e) => {
-      const url = e.target.value;
-      window.location.href = url; 
-    });
-
-
-document.querySelectorAll(".nav-link").forEach(link => {
-  if (link.href === window.location.href) link.classList.add("active");
+select.addEventListener('change', (e) => {
+  const url = e.target.value;
+  window.location.href = url;
 });
+
+
+
+activeUrl();
+// document.querySelectorAll(".nav-link").forEach(link => {
+//   if (link.href === window.location.href) link.classList.add("active");
+// });
 
 document.addEventListener("DOMContentLoaded", () => {
   const url = window.location.href;
@@ -30,10 +33,16 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isLocal) {
         const raw = localStorage.getItem("tickets");
         if (!raw) return [];
-        try { return JSON.parse(atob(raw)); } 
-        catch (e) { localStorage.removeItem("tickets"); return []; }
+        try {
+          return JSON.parse(atob(raw));
+        } 
+        catch (e) {
+          localStorage.removeItem("tickets"); return [];
+        }
       }
-      if (isSession) return JSON.parse(sessionStorage.getItem("tickets")) || [];
+      if (isSession) {
+        return JSON.parse(sessionStorage.getItem("tickets")) || [];
+      }
       if (isMemory) return [...memoryStore];
       return [];
     }

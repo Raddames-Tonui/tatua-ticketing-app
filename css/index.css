@@ -6,9 +6,12 @@
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
+html {
+  font-size: 16px;
+}
 
 body {
-  background: var(--color-bg);
+  background: var(--color-background);
   min-height: 100vh;
 }
 
@@ -21,6 +24,7 @@ body {
   align-items: center;
   padding: 12px 35px;
 }
+
 .header-wrapper{
   display: flex;
   justify-content: start;
@@ -33,6 +37,7 @@ body {
 
 .header img {
   height: 32px;
+  width: 32px;
   margin-right: 0;
 }
 
