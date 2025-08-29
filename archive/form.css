@@ -1,0 +1,303 @@
+:root {
+    /* Form Colors */
+    --form-bg-default: #ffebb0;
+    --form-bg-focus: #fff5d1;
+    --form-bg-error: #ffcccb;
+
+    /* Border Colors */
+    --form-border-default: #ccc;
+    --form-border-focus: #007acc;
+    --form-border-error: #dc3545;
+
+    /* Focus Colors */
+    --form-focus-shadow: rgba(0, 122, 204, 0.2);
+    --form-error-shadow: rgba(220, 53, 69, 0.2);
+
+    /* Checkbox/Radio Colors */
+    --form-checkbox-checked: #007acc;
+    --form-checkbox-error: #dc3545;
+    --form-checkbox-checkmark: white;
+
+    /* Required Field Colors */
+    --form-required-color: #dc3545;
+    --form-required-bg: #fff5f5;
+
+    /* Layout */
+    --form-grid-columns: 150px 200px;
+    --form-grid-gap: 16px;
+    --form-input-height: 40px;
+    --form-input-padding: 8px 12px;
+    --form-border-radius: 4px;
+    --form-font-size: 14px;
+}
+
+body{
+    font-family: Helvetica, sans-serif;
+}
+
+.form-grid {
+    --label-width: 150px;
+    --input-width: 350px;
+    display: grid;
+    grid-template-columns: var(--label-width) var(--input-width);
+    gap: var(--form-grid-gap);
+    align-items: start; /* Better alignment for different input heights */
+}
+
+.form-grid > label {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    min-height: var(--form-input-height); /* Consistent alignment with inputs */
+    position: relative;
+}
+
+/* Required field indicator - simple approach */
+.form-grid > label.required::after {
+    content: ' *';
+    color: var(--form-required-color);
+    font-weight: bold;
+    margin-left: 4px;
+}
+
+/* Base input styling for text-based inputs and selects */
+.form-grid > input[type="text"],
+.form-grid > input[type="email"],
+.form-grid > input[type="password"],
+.form-grid > input[type="tel"],
+.form-grid > input[type="url"],
+.form-grid > input[type="number"],
+.form-grid > textarea,
+.form-grid > select {
+    background: var(--form-bg-default);
+    padding: var(--form-input-padding);
+    border: 1px solid var(--form-border-default);
+    border-radius: var(--form-border-radius);
+    font-family: inherit;
+    font-size: var(--form-font-size);
+    min-height: var(--form-input-height);
+    box-sizing: border-box;
+}
+
+/* Required field styling */
+.form-grid > input:required,
+.form-grid > textarea:required,
+.form-grid > select:required {
+    border-left: 3px solid var(--form-required-color);
+    background: var(--form-required-bg);
+}
+
+/* Valid required fields (when filled) */
+.form-grid > input:required:valid,
+.form-grid > textarea:required:valid,
+.form-grid > select:required:valid {
+    border-left-color: #28a745; /* Green for valid */
+    background: var(--form-bg-default);
+}
+
+/* Invalid required fields */
+.form-grid > input:required:invalid:not(:placeholder-shown),
+.form-grid > textarea:required:invalid:not(:placeholder-shown),
+.form-grid > select:required:invalid {
+    border-left-color: var(--form-required-color);
+    background: var(--form-bg-error);
+}
+
+/* Focus states for text-based inputs and selects */
+.form-grid > input[type="text"]:focus,
+.form-grid > input[type="email"]:focus,
+.form-grid > input[type="password"]:focus,
+.form-grid > input[type="tel"]:focus,
+.form-grid > input[type="url"]:focus,
+.form-grid > input[type="number"]:focus,
+.form-grid > textarea:focus,
+.form-grid > select:focus {
+    outline: none;
+    background: var(--form-bg-focus);
+    border-color: var(--form-border-focus);
+    box-shadow: 0 0 0 3px var(--form-focus-shadow);
+}
+
+/* Required field focus states */
+.form-grid > input:required:focus,
+.form-grid > textarea:required:focus,
+.form-grid > select:required:focus {
+    background: var(--form-bg-focus);
+}
+
+/* Error states for text-based inputs and selects */
+.form-grid > input[type="text"].has-error,
+.form-grid > input[type="email"].has-error,
+.form-grid > input[type="password"].has-error,
+.form-grid > input[type="tel"].has-error,
+.form-grid > input[type="url"].has-error,
+.form-grid > input[type="number"].has-error,
+.form-grid > textarea.has-error,
+.form-grid > select.has-error {
+    background: var(--form-bg-error);
+    border-color: var(--form-border-error);
+}
+
+/* Error focus states */
+.form-grid > input[type="text"].has-error:focus,
+.form-grid > input[type="email"].has-error:focus,
+.form-grid > input[type="password"].has-error:focus,
+.form-grid > input[type="tel"].has-error:focus,
+.form-grid > input[type="url"].has-error:focus,
+.form-grid > input[type="number"].has-error:focus,
+.form-grid > textarea.has-error:focus,
+.form-grid > select.has-error:focus {
+    box-shadow: 0 0 0 3px var(--form-error-shadow);
+}
+
+/* Textarea specific styling */
+.form-grid > textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Select specific styling */
+.form-grid > select {
+    cursor: pointer;
+    appearance: none; /* Remove default styling */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    padding-right: 40px; /* Space for custom arrow */
+}
+
+/* Checkbox container styling */
+.form-grid > .checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: var(--form-input-height);
+}
+
+/* Custom checkbox styling */
+.form-grid input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--form-border-default);
+    border-radius: var(--form-border-radius);
+    background: var(--form-bg-default);
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+}
+
+/* Required checkbox styling */
+.form-grid input[type="checkbox"]:required {
+    border-color: var(--form-required-color);
+    background: var(--form-required-bg);
+}
+
+/* Valid required checkbox */
+.form-grid input[type="checkbox"]:required:checked {
+    background: var(--form-checkbox-checked);
+    border-color: var(--form-checkbox-checked);
+}
+
+/* Checkbox checked state */
+.form-grid input[type="checkbox"]:checked {
+    background: var(--form-checkbox-checked);
+    border-color: var(--form-checkbox-checked);
+}
+
+/* Checkbox checkmark */
+.form-grid input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid var(--form-checkbox-checkmark);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Checkbox focus state */
+.form-grid input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--form-focus-shadow);
+}
+
+/* Checkbox error state */
+.form-grid input[type="checkbox"].has-error {
+    border-color: var(--form-border-error);
+    background: var(--form-bg-error);
+}
+
+.form-grid input[type="checkbox"].has-error:checked {
+    background: var(--form-checkbox-error);
+    border-color: var(--form-checkbox-error);
+}
+
+/* Checkbox error focus state */
+.form-grid input[type="checkbox"].has-error:focus {
+    box-shadow: 0 0 0 3px var(--form-error-shadow);
+}
+
+/* Required checkbox label styling */
+.form-grid .checkbox-container label.required::after {
+    content: ' *';
+    color: var(--form-required-color);
+    font-weight: bold;
+    margin-left: 4px;
+}
+
+/* Checkbox label styling */
+.form-grid .checkbox-container label {
+    font-weight: normal;
+    cursor: pointer;
+    min-height: auto;
+}
+
+/* Radio button styling (bonus) */
+.form-grid > .radio-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: var(--form-input-height);
+}
+
+.form-grid input[type="radio"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--form-border-default);
+    border-radius: 50%;
+    background: var(--form-bg-default);
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+}
+
+.form-grid input[type="radio"]:checked {
+    border-color: var(--form-checkbox-checked);
+}
+
+.form-grid input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--form-checkbox-checked);
+}
+
+.form-grid input[type="radio"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--form-focus-shadow);
+}
+
+.form-grid .radio-container label {
+    font-weight: normal;
+    cursor: pointer;
+    min-height: auto;
+}

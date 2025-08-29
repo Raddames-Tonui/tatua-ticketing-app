@@ -1,33 +1,57 @@
+:root{
+  /* Form colors */
+  --form-bg-default: ;
+  --form-bg-input: red ; 
+
+
+  /* Border */
+  --form-border-default:#6b6b6b ;
+  --form-border-focus:#6d28d9 ;
+  --form-border-error:#dc3545 ;
+
+  --text-color:#333;
+
+  --form-checkbox-checked: ;
+  --form-checkbox-error: ;
+  --form-checkbox-checkmark:  ;
+
+  --form-required-color:  ;
+  --form-required-bg: ;
+
+  /* Layout */
+  --form-grid-columns: 150px 1fr;
+  --form-grid-gap: 4px 10px;
+  --form-group-margin-bottom: 18px;
+}
 
 /* Form Container */
 .ticket-form {
   padding: 25px 30px;
   max-width: 600px;
   width: 100%;
-    overflow-y: scroll;
-
 }
 
 /* Form Groups*/
 .form-group {
   display: grid;
-  grid-template-columns: 150px 1fr; 
+  grid-template-columns:var(--form-grid-columns) ; 
   grid-template-rows: auto auto; 
   grid-template-areas: 
     "label form-input "
     "error-message error-message ";
-  gap: 4px 10px;
-  margin-bottom: 5px;
+  gap:var(--form-grid-gap) ;
+  margin-bottom: var(--form-group-margin-bottom) ;
 }
 
 .form-label {
   grid-area: label;
   font-weight: bold;
   font-size: 0.9rem;
-  color: #333;
+  color: var(--text-color);
   white-space: nowrap;
   align-content: center;
 }
+
 
 .input-wrapper {
   grid-area: form-input;
@@ -37,7 +61,7 @@
 
 .input-indicator {
   font-size: 1.2rem;
-}
+} 
 
 .selected-files {
   grid-column: 2/4;
@@ -48,7 +72,7 @@
 
 .selected-files span{
   display: inline-block;
-  background: #f3f3f3;
+  background: var(--form-bg-default);
   padding: 2px 6px;
   margin-right: 4px;
   border-radius: 4px;
@@ -64,6 +88,7 @@
 
 
 
+/* Inputs */
 .form-input,
 .form-select,
 .form-textarea,
@@ -82,6 +107,23 @@
 .form-file:focus {
   border-color: #6d28d9;
   box-shadow: 0 0 3px rgba(109, 40, 217, 0.4);
+}
+
+.form-input:invalid,
+.form-select:invalid,
+.form-textarea:invalid,
+.form-file:invalid {
+  border-color: var(--form-border-default);
+}
+
+
+.input-wrapper > input[type="text"],
+.input-wrapper > input[type="email"]
+.input-wrapper > input[type="tel"]
+.input-wrapper > input[type="radio"]
+.input-wrapper > input[type="checkbox"]
+.input-wrapper > textarea,
+.input-wrapper > select {
 }
 
 .form-textarea {
@@ -161,6 +203,7 @@ input[type="checkbox"] {
 }
 
 
+/* Wrap input/select/textarea + icon */
 .input-wrapper {
   display: flex;
   align-items: center;
@@ -180,6 +223,7 @@ input[type="checkbox"] {
   width: 100%;
 }
 
+/* Error icon*/
 .input-indicator {
   position: absolute;
   right: 3px;
@@ -189,6 +233,7 @@ input[type="checkbox"] {
   pointer-events: none;
 }
 
+/* Borders */
 .invalid {
   border: 2px solid red !important;
 }
@@ -221,4 +266,5 @@ input[type="checkbox"] {
 .file-name {
   flex-grow: 1; 
 }
+
 

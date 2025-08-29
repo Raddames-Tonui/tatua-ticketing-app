@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <title>CSS Forms</title>
+   <link rel="stylesheet" href="./form.css">
+</head>
+
+<body>
+<div style="padding: 40px 80px">
+    <form class="form-grid">
+        <label for="name" class="required">Name</label>
+        <input type="text" id="name" name="name" required placeholder="Enter your name">
+
+        <label for="email" class="required">Email</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
+
+        <label for="country" class="required">Country</label>
+        <select id="country" name="country" required>
+            <option value="">Choose...</option>
+            <option value="us">United States</option>
+        </select>
+
+        <label>Terms</label>
+        <div class="checkbox-container">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms" class="required">I agree to the terms</label>
+        </div>
+
+        <label for="phone" >Phone</label>
+        <input type="tel" id="phone" name="phone">
+    </form>
+
+    <form class="form-grid" style="--label-width: 300px; --input-width: 400px; margin-top: 150px;">
+        <label for="f2-name">Name</label>
+        <input type="text" id="f2-name" name="name" placeholder="Enter your name">
+
+        <label for="f2-email">Email</label>
+        <input type="email" id="f2-email" name="email" placeholder="you@example.com">
+
+        <label for="f2-country">Country</label>
+        <select id="f2-country" name="country">
+            <option value="">Choose...</option>
+            <option value="us">United States</option>
+        </select>
+
+        <label>Terms</label>
+        <div class="checkbox-container">
+            <input type="checkbox" id="f2-terms" name="terms">
+            <label for="f2-terms">I agree to the terms</label>
+        </div>
+
+        <label for="f2-phone" >Phone</label>
+        <input type="tel" id="f2-phone" name="phone">
+    </form>
+</div>
+</body>
+</html>
